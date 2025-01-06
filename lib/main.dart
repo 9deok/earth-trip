@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'core/widgets/app_scaffold.dart';
 import 'app_providers.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  initializeDateFormatting('ko_KR'); // 한국어 로케일 데이터 초기화
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
