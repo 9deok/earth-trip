@@ -1,0 +1,68 @@
+# Flutter/Dart 관련
+.dart_tool/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+.melos_tool/
+build/
+.pub-cache/
+.pub/
+
+# iOS
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/Pods/
+ios/.symlinks/
+ios/Runner.xcworkspace/
+ios/build/
+ios/.dart_tool/
+ios/Podfile.lock
+
+# macOS
+macos/Flutter/ephemeral/
+macos/build/
+
+# Android
+android/.gradle/
+android/captures/
+android/gradle/
+android/local.properties
+android/.idea/
+android/build/
+
+# Web
+web/.dart_tool/
+web/build/
+
+# Windows
+windows/Flutter/ephemeral/
+windows/build/
+windows/.dart_tool/
+
+# Linux
+linux/Flutter/ephemeral/
+linux/build/
+linux/.dart_tool/
+
+# VSCode 설정 (공유하지 않아도 되는 사용자 설정)
+.vscode/
+
+# 기타 OS/툴 자동 파일
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# 환경 변수 파일 (필요에 따라 선택적으로 추가)
+.env
+.env.*
+
+# Crashlytics (Firebase 사용 시)
+**/google-services.json
+**/GoogleService-Info.plist
+
+# 파일 시스템 메타
+.DS_Store
+Thumbs.db
