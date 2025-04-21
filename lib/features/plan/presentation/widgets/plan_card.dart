@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'plan_card_styles.dart';
+import 'plan_card_header.dart';
+import 'plan_card_date_range.dart';
+import 'plan_card_info_row.dart';
+import 'plan_card_likes_and_participants.dart';
 
 /// 여행 정보를 카드 형태로 렌더링하는 UI 컴포넌트
 class PlanCard extends StatelessWidget {
@@ -35,78 +40,30 @@ class PlanCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.green.shade100),
-        borderRadius: BorderRadius.circular(8),
-      ),
+      decoration: PlanCardStyles.cardDecoration(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 제목, 국기, D-day 표시
-          Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: Image.asset(
-                  flagAsset,
-                  width: 40,
-                  height: 24,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(width: 8),
-              // Expanded로 감싸서 텍스트가 넘치지 않게 함
-              Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  overflow: TextOverflow.ellipsis, // 길면 ... 처리
-                ),
-              ),
-              const Spacer(),
-              Text('D-$daysLeft', style: const TextStyle(color: Colors.green)),
-            ],
+          PlanCardHeader(
+            flagAsset: flagAsset,
+            title: title,
+            daysLeft: daysLeft,
           ),
           const SizedBox(height: 4),
-          // 날짜 범위
-          Text('${dateFmt.format(startDate)} - ${dateFmt.format(endDate)}'),
-          const SizedBox(height: 8),
-          // 비행, 숙박 시간 및 비용 정보
-          Row(
-            children: [
-              const Icon(Icons.flight_takeoff, size: 16),
-              const SizedBox(width: 4),
-              Text(flightDuration),
-              const SizedBox(width: 16),
-              const Icon(Icons.hotel, size: 16),
-              const SizedBox(width: 4),
-              Text(stayDuration),
-              const Spacer(),
-              const Icon(Icons.attach_money, size: 16),
-              const SizedBox(width: 4),
-              Text(
-                NumberFormat.currency(
-                  locale: 'ko_KR',
-                  symbol: '₩',
-                ).format(cost),
-              ),
-            ],
+          PlanCardDateRange(
+            startDate: startDate,
+            endDate: endDate,
           ),
           const SizedBox(height: 8),
-          // 좋아요 및 참여 인원
-          Row(
-            children: [
-              const Icon(Icons.favorite_border, size: 16),
-              const SizedBox(width: 4),
-              Text('\$likes'),
-              const SizedBox(width: 16),
-              const Icon(Icons.person, size: 16),
-              const SizedBox(width: 4),
-              Text('\$participants'),
-            ],
+          PlanCardInfoRow(
+            flightDuration: flightDuration,
+            stayDuration: stayDuration,
+            cost: cost,
+          ),
+          const SizedBox(height: 8),
+          PlanCardLikesAndParticipants(
+            likes: likes,
+            participants: participants,
           ),
         ],
       ),
