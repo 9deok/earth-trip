@@ -31,6 +31,26 @@ class PlanPage extends StatelessWidget {
           );
         },
       ),
+      floatingActionButton: SizedBox(
+        height: 40, // 원하는 높이
+        child: ElevatedButton.icon(
+          onPressed: () {
+            // TODO: 여행 계획 추가 화면으로 이동 또는 다이얼로그 띄우기
+          },
+          icon: const Icon(Icons.add, size: 18),
+          label: const Text('여행 계획 추가하기', style: TextStyle(fontSize: 14)),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            minimumSize: const Size(0, 40), // 최소 높이
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            elevation: 4,
+          ),
+        ),
+      ),
     );
   }
 }

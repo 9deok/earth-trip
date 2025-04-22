@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'plan_card_styles.dart';
+import 'styles/plan_card_styles.dart';
 import 'plan_card_header.dart';
 import 'plan_card_date_range.dart';
 import 'plan_card_info_row.dart';
@@ -35,7 +35,7 @@ class PlanCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateFmt = DateFormat('yyyy-MM-dd');
+    final dateFormat = DateFormat('yyyy-MM-dd');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -50,10 +50,7 @@ class PlanCard extends StatelessWidget {
             daysLeft: daysLeft,
           ),
           const SizedBox(height: 4),
-          PlanCardDateRange(
-            startDate: startDate,
-            endDate: endDate,
-          ),
+          PlanCardDateRange(startDate: startDate, endDate: endDate),
           const SizedBox(height: 8),
           PlanCardInfoRow(
             flightDuration: flightDuration,
