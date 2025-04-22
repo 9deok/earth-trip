@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 class PlanCardInfoRow extends StatelessWidget {
   final String flightDuration, stayDuration;
   final int cost;
-  const PlanCardInfoRow({required this.flightDuration, required this.stayDuration, required this.cost});
+  const PlanCardInfoRow({super.key, required this.flightDuration, required this.stayDuration, required this.cost});
   @override
   Widget build(BuildContext context) => Row(
         children: [

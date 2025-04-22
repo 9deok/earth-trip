@@ -6,20 +6,21 @@ class PlanModel extends PlanEntity {
     required super.title,
     required super.start,
     required super.end,
-    required super.cost,
-    required super.daysLeft,
-    required super.flightDuration,
-    required super.stayDuration,
-    required super.likes,
-    required super.participants,
+    super.imageUrl,
+    super.cost,
+    super.daysLeft,
+    super.flightDuration,
+    super.stayDuration,
+    super.likes,
+    super.participants,
   });
 
-  /// JSON 맵을 받아 필드 매핑 후 새 PlanModel 객체 생성
   factory PlanModel.fromJson(Map<String, dynamic> json) {
     return PlanModel(
       title: json['title'],
       start: DateTime.parse(json['start']),
       end: DateTime.parse(json['end']),
+      imageUrl: json['imageUrl'],
       cost: json['cost'],
       daysLeft: json['daysLeft'],
       flightDuration: json['flight'],

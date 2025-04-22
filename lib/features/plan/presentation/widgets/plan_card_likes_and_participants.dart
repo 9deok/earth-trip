@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PlanCardLikesAndParticipants extends StatelessWidget {
   final int likes, participants;
-  const PlanCardLikesAndParticipants({required this.likes, required this.participants});
+  const PlanCardLikesAndParticipants({super.key, required this.likes, required this.participants});
   @override
   Widget build(BuildContext context) => Row(
         children: [

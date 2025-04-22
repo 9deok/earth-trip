@@ -9,7 +9,7 @@ import 'plan_card_likes_and_participants.dart';
 /// 여행 정보를 카드 형태로 렌더링하는 UI 컴포넌트
 class PlanCard extends StatelessWidget {
   final String title;
-  final String flagAsset;
+  final String imageUrl;
   final DateTime startDate;
   final DateTime endDate;
   final int daysLeft;
@@ -22,7 +22,7 @@ class PlanCard extends StatelessWidget {
   const PlanCard({
     super.key,
     required this.title,
-    required this.flagAsset,
+    required this.imageUrl,
     required this.startDate,
     required this.endDate,
     required this.daysLeft,
@@ -45,7 +45,7 @@ class PlanCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           PlanCardHeader(
-            flagAsset: flagAsset,
+            flagAsset: imageUrl,
             title: title,
             daysLeft: daysLeft,
           ),

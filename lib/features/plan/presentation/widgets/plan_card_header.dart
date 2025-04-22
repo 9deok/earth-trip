@@ -16,7 +16,14 @@ class PlanCardHeader extends StatelessWidget {
     children: [
       ClipRRect(
         borderRadius: BorderRadius.circular(4),
-        child: Image.asset(flagAsset, width: 40, height: 24, fit: BoxFit.cover),
+        child: Image.asset(
+          (flagAsset.isEmpty)
+              ? 'assets/flags/default.png'
+              : flagAsset,
+          width: 40,
+          height: 24,
+          fit: BoxFit.cover,
+        ),
       ),
       const SizedBox(width: 8),
       Expanded(

@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 class PlanCardDateRange extends StatelessWidget {
   final DateTime startDate, endDate;
-  const PlanCardDateRange({required this.startDate, required this.endDate});
+  const PlanCardDateRange({super.key, required this.startDate, required this.endDate});
   @override
   Widget build(BuildContext context) {
     final dateFmt = DateFormat('yyyy-MM-dd');
