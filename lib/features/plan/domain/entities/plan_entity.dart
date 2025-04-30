@@ -1,5 +1,8 @@
+import 'package:uuid/uuid.dart';
+
 /// 앱 내에서 사용하는 여행 계획 도메인 객체
 class PlanEntity {
+  final String id; // 고유 식별자 추가
   final String title; // 여행명
   final String? imageUrl; // 이미지 경로 (String, optional)
   final DateTime start; // 시작일
@@ -12,6 +15,7 @@ class PlanEntity {
   final int? participants; // 동행 인원수 (optional)
 
   PlanEntity({
+    required this.id,
     required this.title,
     required this.start,
     required this.end,
@@ -26,6 +30,7 @@ class PlanEntity {
 
   static PlanEntity fromJson(e) {
     return PlanEntity(
+      id: e['id'] ?? const Uuid().v4(), // id가 없으면 새로 생성
       title: e['title'],
       start: DateTime.parse(e['start']),
       end: DateTime.parse(e['end']),
@@ -41,6 +46,7 @@ class PlanEntity {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'title': title,
       'start': start.toIso8601String(),
       'end': end.toIso8601String(),

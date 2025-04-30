@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/place_select_step.dart';
 import '../widgets/date_range_select_step.dart';
+import 'package:uuid/uuid.dart';
 
 class AddPlanPage extends StatefulWidget {
   const AddPlanPage({super.key});
@@ -54,6 +55,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
   Future<void> _onComplete() async {
     if (_selectedPlaces.isNotEmpty && _selectedDateRange != null) {
       final plan = PlanEntity(
+        id: const Uuid().v4(), // 고유 id 생성
         title: _selectedPlaces.first,
         start: _selectedDateRange!.start,
         end: _selectedDateRange!.end,

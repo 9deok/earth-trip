@@ -3,6 +3,7 @@ import 'package:earth_trip/features/plan/domain/entities/plan_entity.dart';
 class DummyPlanRepository {
   static List<PlanEntity> fetchUpcomingPlans() => [
     PlanEntity(
+      id: 'dummy-1',
       title: '전주 여행',
       imageUrl: 'assets/flags/jeonju.png',
       start: DateTime(2025, 5, 1),
@@ -15,6 +16,7 @@ class DummyPlanRepository {
       participants: 2,
     ),
     PlanEntity(
+      id: 'dummy-2',
       title: '스페인 여행',
       imageUrl: 'assets/flags/spain.png',
       start: DateTime(2025, 9, 26),
@@ -27,6 +29,7 @@ class DummyPlanRepository {
       participants: 2,
     ),
     PlanEntity(
+      id: 'dummy-3',
       title: '발리 여행',
       imageUrl: 'assets/flags/bali.png',
       start: DateTime(2026, 5, 26),
@@ -39,6 +42,7 @@ class DummyPlanRepository {
       participants: 2,
     ),
     PlanEntity(
+      id: 'dummy-4',
       title: 'switzerland 여행',
       imageUrl: 'assets/flags/switzerland.png',
       start: DateTime(2027, 2, 26),
