@@ -1,5 +1,7 @@
+import 'package:earth_trip/features/plan/data/datasource/plan_remote_data_source.dart';
 import 'package:earth_trip/features/plan/domain/entities/plan_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/place_select_step.dart';
 import '../widgets/date_range_select_step.dart';
 
@@ -49,7 +51,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
     });
   }
 
-  void _onComplete() {
+  Future<void> _onComplete() async {
     if (_selectedPlaces.isNotEmpty && _selectedDateRange != null) {
       final plan = PlanEntity(
         title: _selectedPlaces.first,
@@ -62,6 +64,8 @@ class _AddPlanPageState extends State<AddPlanPage> {
         likes: 0,
         participants: 1,
       );
+      final dataSource = context.read<PlanRemoteDataSource>();
+      await dataSource.saveUserPlan(plan);
       Navigator.pop(context, plan);
     }
   }

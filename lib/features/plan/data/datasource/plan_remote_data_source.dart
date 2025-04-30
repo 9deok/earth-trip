@@ -4,4 +4,6 @@ import '../../domain/entities/plan_entity.dart';
 abstract class PlanRemoteDataSource {
   /// 서버로부터 다가오는 여행 계획 리스트를 비동기로 반환
   Future<List<PlanEntity>> fetchUpcomingPlans();
+
+  Future<void> saveUserPlan(PlanEntity plan);
 }

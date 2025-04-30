@@ -23,4 +23,34 @@ class PlanEntity {
     this.likes,
     this.participants,
   });
+
+  static PlanEntity fromJson(e) {
+    return PlanEntity(
+      title: e['title'],
+      start: DateTime.parse(e['start']),
+      end: DateTime.parse(e['end']),
+      imageUrl: e['imageUrl'],
+      cost: e['cost'],
+      daysLeft: e['daysLeft'],
+      flightDuration: e['flightDuration'],
+      stayDuration: e['stayDuration'],
+      likes: e['likes'],
+      participants: e['participants'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'start': start.toIso8601String(),
+      'end': end.toIso8601String(),
+      'imageUrl': imageUrl,
+      'cost': cost,
+      'daysLeft': daysLeft,
+      'flightDuration': flightDuration,
+      'stayDuration': stayDuration,
+      'likes': likes,
+      'participants': participants,
+    };
+  }
 }
