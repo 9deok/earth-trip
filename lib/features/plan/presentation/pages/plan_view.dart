@@ -24,27 +24,29 @@ class _PlanViewState extends State<PlanView> {
       appBar: AppBar(title: const Text('내 계획')),
       body: ListView.builder(
         itemCount: controller.plans.length,
-        itemBuilder: (context, index) {
-          final p = controller.plans[index];
-          final imageUrl =
-              (p.imageUrl == null || p.imageUrl!.isEmpty)
-                  ? 'assets/flags/default.png'
-                  : p.imageUrl!;
-          return PlanCard(
-            title: p.title,
-            imageUrl: imageUrl,
-            startDate: p.start,
-            endDate: p.end,
-            daysLeft: p.daysLeft ?? 0,
-            flightDuration: p.flightDuration ?? '',
-            stayDuration: p.stayDuration ?? '',
-            cost: p.cost ?? 0,
-            likes: p.likes ?? 0,
-            participants: p.participants ?? 1,
-          );
-        },
+        itemBuilder: (context, index) => _buildPlanItem(context, controller, index),
       ),
       floatingActionButton: const AddPlanButton(),
+    );
+  }
+
+  Widget _buildPlanItem(BuildContext context, PlanController controller, int index) {
+    final p = controller.plans[index];
+    final imageUrl =
+        (p.imageUrl == null || p.imageUrl!.isEmpty)
+            ? 'assets/flags/default.png'
+            : p.imageUrl!;
+    return PlanCard(
+      title: p.title,
+      imageUrl: imageUrl,
+      startDate: p.start,
+      endDate: p.end,
+      daysLeft: p.daysLeft ?? 0,
+      flightDuration: p.flightDuration ?? '',
+      stayDuration: p.stayDuration ?? '',
+      cost: p.cost ?? 0,
+      likes: p.likes ?? 0,
+      participants: p.participants ?? 1,
     );
   }
 }
