@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/plan_controller.dart';
 import '../widgets/plan_card.dart';
-import 'add_plan_page.dart';
+import '../widgets/add_plan_button.dart';
 
 class PlanView extends StatefulWidget {
   const PlanView({super.key});
@@ -44,33 +44,7 @@ class _PlanViewState extends State<PlanView> {
           );
         },
       ),
-      floatingActionButton: SizedBox(
-        height: 40,
-        child: ElevatedButton.icon(
-          onPressed: () async {
-            final result = await Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const AddPlanPage()),
-            );
-            if (result != null) {
-              await context.read<PlanController>().loadPlans();
-              setState(() {}); // 상태 갱신을 위해 setState 호출
-            }
-          },
-          icon: const Icon(Icons.add, size: 18),
-          label: const Text('여행 계획 추가하기', style: TextStyle(fontSize: 14)),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
-            ),
-            minimumSize: const Size(0, 40),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            elevation: 4,
-          ),
-        ),
-      ),
+      floatingActionButton: const AddPlanButton(),
     );
   }
 }
