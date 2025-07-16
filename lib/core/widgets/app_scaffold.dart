@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'bottom_nav_bar.dart';
 import '../../features/plan/presentation/pages/plan_page.dart';
+import '../../features/home/presentation/pages/home_page.dart';
 
 class AppScaffold extends StatefulWidget {
   const AppScaffold({super.key});
@@ -10,10 +11,10 @@ class AppScaffold extends StatefulWidget {
 }
 
 class _AppScaffoldState extends State<AppScaffold> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
 
   static final _pages = <Widget>[
-    Center(child: Text('Home')),
+    HomePage(),
     Center(child: Text('Diary')),
     PlanPage(),
     Center(child: Text('Chat')),
