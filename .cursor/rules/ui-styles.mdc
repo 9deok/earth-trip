@@ -19,6 +19,12 @@ description: UI 스타일 분리/토큰화 규칙
   - 전역 토큰: `AppColors`, `AppSpacing`, `AppRadii`, `AppTextStyles` 사용
 - 다른 위젯의 스타일 파일을 직접 참조하지 않는다(순환/강결합 방지)
 
+## UX 메시지/에러 처리 표준
+
+- 사용자-facing 텍스트는 `core/i18n/strings.dart` 상수 사용
+- 성공/실패 피드백은 `ScaffoldMessenger.of(context).showSnackBar(...)`로 통일
+- 저장/삭제 실패 등 공통 에러 메시지는 `Strings.Errors` 사용
+
 ## 적용 예
 
 - `PlanCard` → `PlanCardStyles.cardDecoration(context)` 형태로만 접근

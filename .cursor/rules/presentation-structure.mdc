@@ -30,10 +30,14 @@ presentation/
 ## 코딩 규칙
 
 - pages에서는 DI만 하고 비즈니스 로직 금지. (예: `ChangeNotifierProvider` 생성/주입)
-- views는 `context.watch/read`로 컨트롤러/상태를 구독하고, sections/widgets에 데이터를 전달.
 - views는 `context.watch/read` 또는 `Consumer<T>`로 컨트롤러/상태를 구독하고, sections/widgets에 데이터를 전달.
 - sections는 최대한 UI 조립에 집중. 복잡 로직은 views/컨트롤러로 승격.
 - widgets는 `const` 우선, 콜백/데이터만 입력으로 받아 렌더링.
+
+### UX 메시지/에러 처리
+
+- 사용자 피드백(성공/실패)은 표준 스낵바/다이얼로그로 일관 처리
+- 텍스트는 `core/i18n/strings.dart` 상수 사용 (하드코딩 금지)
 
 ### 스타일 분리 규칙
 
