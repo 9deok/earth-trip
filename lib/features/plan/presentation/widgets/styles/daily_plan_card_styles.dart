@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/theme/colors.dart';
+import '../../../../../core/theme/spacing.dart';
 
 class DailyPlanCardStyles {
   static const double imageHeight = 120;
@@ -10,20 +12,20 @@ class DailyPlanCardStyles {
   static EdgeInsetsGeometry contentPadding = const EdgeInsets.all(12);
 
   static RoundedRectangleBorder cardShape = RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(12),
+    borderRadius: BorderRadius.circular(AppRadii.lg),
   );
-  static BorderRadius imageTopRadius = const BorderRadius.vertical(
-    top: Radius.circular(12),
+  static BorderRadius imageTopRadius = BorderRadius.vertical(
+    top: Radius.circular(AppRadii.lg),
   );
 
   static BoxDecoration dayBadgeDecoration(BuildContext context) =>
       BoxDecoration(
-        color: Colors.green.shade100,
-        borderRadius: BorderRadius.circular(4),
+        color: AppColors.primary.shade100,
+        borderRadius: BorderRadius.circular(AppRadii.sm),
       );
 
   static TextStyle dayBadgeTextStyle(BuildContext context) =>
-      TextStyle(color: Colors.green.shade800, fontWeight: FontWeight.bold);
+      TextStyle(color: AppColors.primary.shade800, fontWeight: FontWeight.bold);
 
   static CalendarStyles calendarStyles(BuildContext context) =>
       CalendarStyles();

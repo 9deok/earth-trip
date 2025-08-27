@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/theme/colors.dart';
+import '../../../../../core/theme/spacing.dart';
 
 class PlanCardStyles {
   static const titleStyle = TextStyle(
@@ -6,12 +8,10 @@ class PlanCardStyles {
     fontWeight: FontWeight.bold,
   );
 
-  static const dDayStyle = TextStyle(
-    color: Colors.green,
-  );
+  static const dDayStyle = TextStyle(color: AppColors.primary);
 
   static BoxDecoration cardDecoration(BuildContext context) => BoxDecoration(
-        border: Border.all(color: Colors.green.shade100),
-        borderRadius: BorderRadius.circular(8),
-      );
+    border: Border.all(color: AppColors.primary.shade100),
+    borderRadius: BorderRadius.circular(AppRadii.md),
+  );
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/theme/colors.dart';
+import '../../../../../core/theme/spacing.dart';
 
 class AddPlanButtonStyles {
   static const double buttonHeight = 40;
@@ -7,9 +9,11 @@ class AddPlanButtonStyles {
 
   static ButtonStyle buttonStyle(BuildContext context) {
     return ElevatedButton.styleFrom(
-      backgroundColor: Colors.green,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      backgroundColor: AppColors.primary,
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppRadii.xl),
+      ),
       minimumSize: const Size(0, buttonHeight),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       elevation: 4,

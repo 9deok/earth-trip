@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/theme/colors.dart';
+import '../../../../../core/theme/spacing.dart';
 
 class TripSummaryHeaderStyles {
   static double headerHeight(BuildContext context) =>
@@ -13,7 +15,7 @@ class TripSummaryHeaderStyles {
     ),
   );
 
-  static const EdgeInsets contentPadding = EdgeInsets.all(16.0);
+  static const EdgeInsets contentPadding = EdgeInsets.all(AppSpacing.md);
 
   static const TextStyle titleTextStyle = TextStyle(
     color: Colors.white,
