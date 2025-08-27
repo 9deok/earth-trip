@@ -16,6 +16,7 @@ description: UI 스타일 분리/토큰화 규칙
 
 - 위젯 파일에서 `TextStyle`, `EdgeInsets`, `BoxDecoration`, `Shape` 등은 인라인 금지
 - 스타일은 해당 위젯의 `XxxStyles` 정적 메서드로 제공하고, Theme/토큰을 입력으로 받아 계산
+  - 전역 토큰: `AppColors`, `AppSpacing`, `AppRadii`, `AppTextStyles` 사용
 - 다른 위젯의 스타일 파일을 직접 참조하지 않는다(순환/강결합 방지)
 
 ## 적용 예

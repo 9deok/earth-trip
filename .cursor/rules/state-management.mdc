@@ -20,6 +20,8 @@ description: Provider 기반 DI/상태관리 규칙
 - `watch()`는 리빌드 필요한 곳에만 사용, 그 외는 `read()`
 - 저장/삭제 등 사이드이펙트 후에는 컨트롤러 내부에서 `notifyListeners()`로 UI 반영
 - SharedPreferences 등 로컬 저장은 데이터소스에서 처리하고 컨트롤러는 호출만 수행
+- Provider를 위젯 내부에서 새로 생성할 경우, 하위 트리 컨텍스트에서 `read/watch`해야 한다.
+  - 권장: `Builder` 또는 `Consumer<T>`로 내부 컨텍스트를 받아 사용 (상위 컨텍스트 사용 금지)
 
 ## 관련 타입
 

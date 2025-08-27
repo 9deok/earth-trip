@@ -16,6 +16,7 @@ presentation/
   views/              # 페이지 내부의 화면 단위(상태 구독/바인딩 포함 가능)
   sections/           # 화면의 의미 단위 블록(도메인 바인딩 최소화)
   widgets/            # 순수 프레젠테이션 위젯(스타일/레이아웃 중심)
+  widgets/styles/     # 위젯 전용 스타일 파일(_styles.dart)
 ```
 
 ## 개념/책임 정의
@@ -30,6 +31,7 @@ presentation/
 
 - pages에서는 DI만 하고 비즈니스 로직 금지. (예: `ChangeNotifierProvider` 생성/주입)
 - views는 `context.watch/read`로 컨트롤러/상태를 구독하고, sections/widgets에 데이터를 전달.
+- views는 `context.watch/read` 또는 `Consumer<T>`로 컨트롤러/상태를 구독하고, sections/widgets에 데이터를 전달.
 - sections는 최대한 UI 조립에 집중. 복잡 로직은 views/컨트롤러로 승격.
 - widgets는 `const` 우선, 콜백/데이터만 입력으로 받아 렌더링.
 
@@ -57,3 +59,8 @@ presentation/
 
 - 컨트롤러를 widgets에서 직접 읽지 않는다.
 - API/저장소 호출을 views/pages에서 직접 수행하지 않는다. (컨트롤러/유스케이스 경유)
+
+## 적용 사례
+
+- Plan: `PlanListSection`으로 리스트/삭제 UI를 분리하여 `PlanView`는 조립만 수행
+- Core: `core/widgets/date_range_picker.dart`로 범용 날짜 범위 선택 위젯 제공
