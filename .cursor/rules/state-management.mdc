@@ -1,0 +1,28 @@
+---
+globs: lib/**/*.dart
+description: Provider 기반 DI/상태관리 규칙
+---
+
+## DI 구성
+
+- 전역 의존성은 [lib/app_providers.dart](mdc:lib/app_providers.dart)에서 `Provider`로 등록
+- 순서: `DataSource` → `Repository` → `UseCase` (필요 시 `Controller`는 화면 근처에서 등록)
+- 주입은 생성자 주입을 우선, 위젯에서는 `context.read<T>()`/`watch<T>()` 사용
+
+## 컨트롤러(예: PlanController)
+
+- 예시: [lib/features/plan/presentation/controllers/plan_controller.dart](mdc:lib/features/plan/presentation/controllers/plan_controller.dart)
+- 화면 전환/상태는 `ChangeNotifier` 기반 컨트롤러가 관리, 비즈니스 로직은 유스케이스에 위임
+- 컨트롤러는 I/O를 직접 호출하지 말고, 유스케이스/레포지토리를 통해 접근
+
+## 사용 규칙
+
+- `watch()`는 리빌드 필요한 곳에만 사용, 그 외는 `read()`
+- 저장/삭제 등 사이드이펙트 후에는 컨트롤러 내부에서 `notifyListeners()`로 UI 반영
+- SharedPreferences 등 로컬 저장은 데이터소스에서 처리하고 컨트롤러는 호출만 수행
+
+## 관련 타입
+
+- 유스케이스: [lib/features/plan/domain/usecases/get_plans_use_case.dart](mdc:lib/features/plan/domain/usecases/get_plans_use_case.dart)
+- 레포지토리 인터페이스: [lib/features/plan/domain/repositories/plan_repository.dart](mdc:lib/features/plan/domain/repositories/plan_repository.dart)
+- 레포지토리 구현: [lib/features/plan/data/repositories/plan_repository_impl.dart](mdc:lib/features/plan/data/repositories/plan_repository_impl.dart)

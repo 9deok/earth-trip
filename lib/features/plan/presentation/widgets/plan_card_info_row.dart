@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'styles/plan_card_info_row_styles.dart';
 
 class PlanCardInfoRow extends StatelessWidget {
   final String flightDuration, stayDuration;
@@ -13,16 +14,16 @@ class PlanCardInfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
     children: [
-      const Icon(Icons.flight_takeoff, size: 16),
-      const SizedBox(width: 4),
+      const Icon(Icons.flight_takeoff, size: PlanCardInfoRowStyles.iconSize),
+      PlanCardInfoRowStyles.gapXs,
       Expanded(child: Text(flightDuration, overflow: TextOverflow.ellipsis)),
-      const SizedBox(width: 16),
-      const Icon(Icons.hotel, size: 16),
-      const SizedBox(width: 4),
+      PlanCardInfoRowStyles.gapSm,
+      const Icon(Icons.hotel, size: PlanCardInfoRowStyles.iconSize),
+      PlanCardInfoRowStyles.gapXs,
       Expanded(child: Text(stayDuration, overflow: TextOverflow.ellipsis)),
       const Spacer(),
-      const Icon(Icons.attach_money, size: 16),
-      const SizedBox(width: 4),
+      const Icon(Icons.attach_money, size: PlanCardInfoRowStyles.iconSize),
+      PlanCardInfoRowStyles.gapXs,
       Text(NumberFormat.currency(locale: 'ko_KR', symbol: '₩').format(cost)),
     ],
   );

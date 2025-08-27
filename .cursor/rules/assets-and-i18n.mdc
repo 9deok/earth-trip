@@ -1,0 +1,16 @@
+---
+globs: pubspec.yaml,lib/**/*.dart
+description: 에셋 등록/참조 및 국제화 초기화 규칙
+---
+
+## 에셋 사용
+
+- 모든 이미지/정적 파일은 [pubspec.yaml](mdc:pubspec.yaml)의 `flutter.assets`에 등록
+- 현재 등록 경로: `assets/flags/` — 국기 이미지는 이 경로를 기준으로 참조
+- 런타임 참조 시 경로 하드코딩 대신 상수/헬퍼를 통해 관리 권장
+
+## 국제화/로케일
+
+- 앱 시작 시 한국어 날짜 로케일 초기화: [lib/main.dart](mdc:lib/main.dart)
+- 날짜 포맷/파싱은 `intl` 패키지 사용. 커스텀 포맷은 유틸에 캡슐화
+- 문자열 상수는 화면에 분산하지 말고 중앙 관리(추후 arb/i18n 도입 대비)

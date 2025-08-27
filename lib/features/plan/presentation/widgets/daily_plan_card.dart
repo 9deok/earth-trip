@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../domain/entities/daily_plan_entity.dart';
+import 'styles/daily_plan_card_styles.dart';
 
 class DailyPlanCard extends StatelessWidget {
   final DailyPlanEntity dailyPlan;
@@ -19,29 +20,28 @@ class DailyPlanCard extends StatelessWidget {
     final dateFormat = DateFormat('yyyy.MM.dd (E)', 'ko_KR');
 
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: DailyPlanCardStyles.cardMargin,
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: DailyPlanCardStyles.cardShape,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius:
+            DailyPlanCardStyles.cardShape.borderRadius as BorderRadius,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 대표 이미지
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(12),
-              ),
+              borderRadius: DailyPlanCardStyles.imageTopRadius,
               child: Image.network(
                 dailyPlan.imageUrl,
-                height: 120,
+                height: DailyPlanCardStyles.imageHeight,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(12),
+              padding: DailyPlanCardStyles.contentPadding,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -53,16 +53,12 @@ class DailyPlanCard extends StatelessWidget {
                           horizontal: 8,
                           vertical: 4,
                         ),
-                        decoration: BoxDecoration(
-                          color: Colors.green.shade100,
-                          borderRadius: BorderRadius.circular(4),
+                        decoration: DailyPlanCardStyles.dayBadgeDecoration(
+                          context,
                         ),
                         child: Text(
                           'DAY $dayNumber',
-                          style: TextStyle(
-                            color: Colors.green.shade800,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: DailyPlanCardStyles.dayBadgeTextStyle(context),
                         ),
                       ),
                       const SizedBox(width: 8),

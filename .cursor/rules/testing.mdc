@@ -1,0 +1,19 @@
+---
+globs: test/**/*.dart,lib/**/*.dart
+description: 테스트 작성/실행 가이드
+---
+
+## 테스트 기본
+
+- 테스트 파일은 `test/`에 배치하고 `_test.dart`로 종료
+- 순수 도메인 로직(유스케이스, 엔티티)은 단위 테스트 최우선
+- 데이터소스는 외부 의존성(SharedPreferences 등)을 목/페이크로 대체
+
+## 실행
+
+- 커맨드: `flutter test` (CI에 통합 권장)
+- 위젯 테스트에서는 `pumpWidget` 시 실제 DI 대신 테스트용 Provider 구성체 사용
+
+## 참고 파일
+
+- 예시 위젯 테스트: [test/widget_test.dart](mdc:test/widget_test.dart)

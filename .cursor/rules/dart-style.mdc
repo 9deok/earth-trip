@@ -1,0 +1,27 @@
+---
+globs: *.dart
+description: Dart/Flutter 코딩 스타일 및 관례
+---
+
+## 스타일 가이드
+
+- **널-세이프티**: 모든 공개 API에 명시적 타입, 불필요한 `dynamic` 금지
+- **네이밍**: 함수는 동사/동사구, 변수는 명사형; 약어 대신 전체 단어 사용
+- **불변성 우선**: 지역변수는 `final` 기본, 필요한 경우에만 `var`
+- **const 최적화**: 가능하면 `const` 위젯/생성자 사용으로 리빌드 비용 절감
+- **임포트 정렬**: SDK → 외부패키지 → 내부패키지 순, 와일드카드 임포트 금지
+- **에러 처리**: 도메인/데이터 레이어에서 에러를 식별·변환, UI는 사용자 메시지에 집중
+- **비동기**: `async`/`await` 일관 사용, 무시된 `Future` 남기지 않기
+- **위젯 책임 분리**: 비즈니스 로직은 컨트롤러/유스케이스로 이동, 위젯은 바인딩만
+- **린트 준수**: [analysis_options.yaml](mdc:analysis_options.yaml) 및 `flutter_lints` 권장 설정 준수
+
+## 아키텍처 관례
+
+- **레이어 간 의존성**: `presentation → domain → data` 방향 단방향
+- **DI/Provider**: 전역 의존성은 [lib/app_providers.dart](mdc:lib/app_providers.dart)에 등록
+- **테스트 용이성**: 도메인 유스케이스는 순수 함수/클래스로 유지, I/O는 데이터소스로 위임
+
+## 국제화/날짜 포맷
+
+- 한국어 날짜 포맷은 앱 시작 시 초기화: [lib/main.dart](mdc:lib/main.dart)
+- 날짜/숫자 포맷은 `intl` 사용, 하드코딩 문자열/포맷 금지

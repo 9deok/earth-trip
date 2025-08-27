@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import '../../domain/entities/daily_plan_entity.dart';
 import '../widgets/trip_summary_header.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'styles/plan_card_styles.dart';
+import 'styles/plan_card_header_styles.dart';
 
 class PlanCardHeader extends StatelessWidget {
   final String flagAsset, title;
@@ -15,17 +16,15 @@ class PlanCardHeader extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     children: [
       ClipRRect(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: PlanCardHeaderStyles.flagRadius,
         child: Image.asset(
-          (flagAsset.isEmpty)
-              ? 'assets/flags/default.png'
-              : flagAsset,
-          width: 40,
-          height: 24,
+          (flagAsset.isEmpty) ? 'assets/flags/default.png' : flagAsset,
+          width: PlanCardHeaderStyles.flagWidth,
+          height: PlanCardHeaderStyles.flagHeight,
           fit: BoxFit.cover,
         ),
       ),
-      const SizedBox(width: 8),
+      PlanCardHeaderStyles.gapSmall,
       Expanded(
         child: Text(
           title,

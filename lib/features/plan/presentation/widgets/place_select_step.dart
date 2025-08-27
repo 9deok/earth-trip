@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'styles/place_select_step_styles.dart';
 
 class PlaceSelectStep extends StatefulWidget {
   final List<String> selectedPlaces;
@@ -19,16 +20,30 @@ class PlaceSelectStep extends StatefulWidget {
 class _PlaceSelectStepState extends State<PlaceSelectStep> {
   final TextEditingController _controller = TextEditingController();
   final List<String> _allPlaces = [
-    '서울', '부산', '제주', '도쿄', '오사카', '파리', '런던', '뉴욕', '로마', '방콕', '싱가포르'
+    '서울',
+    '부산',
+    '제주',
+    '도쿄',
+    '오사카',
+    '파리',
+    '런던',
+    '뉴욕',
+    '로마',
+    '방콕',
+    '싱가포르',
   ];
   List<String> _suggestions = [];
 
   void _onTextChanged(String value) {
     setState(() {
-      _suggestions = _allPlaces
-          .where((place) =>
-              place.contains(value) && !widget.selectedPlaces.contains(place))
-          .toList();
+      _suggestions =
+          _allPlaces
+              .where(
+                (place) =>
+                    place.contains(value) &&
+                    !widget.selectedPlaces.contains(place),
+              )
+              .toList();
     });
   }
 
@@ -37,19 +52,19 @@ class _PlaceSelectStepState extends State<PlaceSelectStep> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '여행 장소를 입력하세요',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 16),
+        const Text('여행 장소를 입력하세요', style: PlaceSelectStepStyles.titleStyle),
+        PlaceSelectStepStyles.titleSpacing,
         Wrap(
           spacing: 8,
-          children: widget.selectedPlaces
-              .map((place) => Chip(
-                    label: Text(place),
-                    onDeleted: () => widget.onPlaceRemoved(place),
-                  ))
-              .toList(),
+          children:
+              widget.selectedPlaces
+                  .map(
+                    (place) => Chip(
+                      label: Text(place),
+                      onDeleted: () => widget.onPlaceRemoved(place),
+                    ),
+                  )
+                  .toList(),
         ),
         const SizedBox(height: 16),
         TextField(
@@ -61,20 +76,18 @@ class _PlaceSelectStepState extends State<PlaceSelectStep> {
           onChanged: _onTextChanged,
         ),
         if (_suggestions.isNotEmpty)
-          ..._suggestions
-              .map(
-                (place) => ListTile(
-                  title: Text(place),
-                  onTap: () {
-                    widget.onPlaceSelected(place);
-                    _controller.clear();
-                    setState(() {
-                      _suggestions.clear();
-                    });
-                  },
-                ),
-              )
-              ,
+          ..._suggestions.map(
+            (place) => ListTile(
+              title: Text(place),
+              onTap: () {
+                widget.onPlaceSelected(place);
+                _controller.clear();
+                setState(() {
+                  _suggestions.clear();
+                });
+              },
+            ),
+          ),
         // 직접 입력 버튼 추가
         if (_controller.text.isNotEmpty &&
             !_allPlaces.contains(_controller.text) &&

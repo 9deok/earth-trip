@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'styles/trip_summary_header_styles.dart';
 
 class TripSummaryHeader extends StatelessWidget {
   final String title;
@@ -25,20 +26,13 @@ class TripSummaryHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 3,
+      height: TripSummaryHeaderStyles.headerHeight(context),
       width: double.infinity,
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(imageUrl),
-          fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.4),
-            BlendMode.darken,
-          ),
-        ),
+        image: TripSummaryHeaderStyles.backgroundImage(imageUrl),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: TripSummaryHeaderStyles.contentPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
@@ -48,11 +42,7 @@ class TripSummaryHeader extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TripSummaryHeaderStyles.titleTextStyle,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -69,7 +59,7 @@ class TripSummaryHeader extends StatelessWidget {
                 const SizedBox(width: 4),
                 Text(
                   '함께한 사람 $participantCount명',
-                  style: const TextStyle(color: Colors.white),
+                  style: TripSummaryHeaderStyles.bodyTextStyle,
                 ),
               ],
             ),
@@ -78,14 +68,14 @@ class TripSummaryHeader extends StatelessWidget {
               children: [
                 Text(
                   '$country / $city',
-                  style: const TextStyle(color: Colors.white),
+                  style: TripSummaryHeaderStyles.bodyTextStyle,
                 ),
               ],
             ),
             const SizedBox(height: 8),
             Text(
               memo,
-              style: const TextStyle(color: Colors.white70),
+              style: TripSummaryHeaderStyles.bodyMutedTextStyle,
               overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 8),
@@ -95,7 +85,7 @@ class TripSummaryHeader extends StatelessWidget {
                 const SizedBox(width: 4),
                 Text(
                   '₩${totalExpense.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},')}',
-                  style: const TextStyle(color: Colors.white),
+                  style: TripSummaryHeaderStyles.bodyTextStyle,
                 ),
               ],
             ),

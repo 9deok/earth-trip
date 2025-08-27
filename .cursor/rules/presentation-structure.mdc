@@ -1,0 +1,59 @@
+---
+globs: lib/**/presentation/**/*.dart
+description: Presentation 계층 디렉터리/역할 구분 규칙
+---
+
+## 목적
+
+프리젠테이션 계층을 책임별로 분리해 유지보수성과 재사용성을 높입니다. 각 레이어의 책임이 명확히 드러나도록 디렉터리와 네이밍을 통일합니다.
+
+## 디렉터리 구조 권장안
+
+```
+presentation/
+  controllers/        # ChangeNotifier 등 상태/이벤트 관리
+  pages/              # 라우팅 가능 최상위 화면 (Scaffold 보유)
+  views/              # 페이지 내부의 화면 단위(상태 구독/바인딩 포함 가능)
+  sections/           # 화면의 의미 단위 블록(도메인 바인딩 최소화)
+  widgets/            # 순수 프레젠테이션 위젯(스타일/레이아웃 중심)
+```
+
+## 개념/책임 정의
+
+- pages: 라우팅 엔드포인트. AppBar/Scaffold/Route argument 처리. 최소 로직만.
+- views: 특정 화면의 상태 바인딩/구독을 담당. 컨트롤러/유스케이스 연결 지점.
+- sections: 뷰 내부의 의미 단위 블록. 간단한 바인딩은 허용하되 컨트롤러 직접 의존은 지양.
+- widgets: 상태 비독립적 순수 UI. 도메인 의존 금지. 입력은 매개변수로만.
+- controllers: 화면 수명주기와 사용자 이벤트를 관리. 비즈니스 로직은 유스케이스로 위임.
+
+## 코딩 규칙
+
+- pages에서는 DI만 하고 비즈니스 로직 금지. (예: `ChangeNotifierProvider` 생성/주입)
+- views는 `context.watch/read`로 컨트롤러/상태를 구독하고, sections/widgets에 데이터를 전달.
+- sections는 최대한 UI 조립에 집중. 복잡 로직은 views/컨트롤러로 승격.
+- widgets는 `const` 우선, 콜백/데이터만 입력으로 받아 렌더링.
+
+### 스타일 분리 규칙
+
+- 위젯 파일 내에서 비트맵 색/간격/테두리/텍스트 스타일 등 “비주얼 속성”은 인라인으로 두지 않는다.
+- 각 위젯은 `widgets/styles/<widget>_styles.dart`에 스타일을 정의하고, 위젯은 해당 정적 헬퍼만 사용한다.
+- 공통 토큰(색상/간격/타이포)은 `core/theme` 또는 ThemeExtension에서 관리하고, 스타일 파일은 토큰을 조합만 한다.
+
+## 네이밍 규칙
+
+- `*Page`: 라우팅 가능 최상위. 예) `PlanPage`
+- `*View`: 특정 화면의 핵심 뷰. 예) `PlanView`
+- `*Section`: 화면 구성 블록. 예) `PlanListSection`, `FiltersSection`
+- `*Card`/`*Tile`/`*Button` 등은 widgets에 위치
+
+## Plan 모듈 적용 예시
+
+- pages: `plan_page.dart` (Scaffold/라우팅)
+- views: `plan_view.dart` (컨트롤러 구독, 리스트/로딩 스위치)
+- sections: (신규) `plan_list_section.dart`, `plan_empty_section.dart`
+- widgets: `plan_card.dart`, `add_plan_button.dart`, 기타 소형 위젯
+
+## 반례
+
+- 컨트롤러를 widgets에서 직접 읽지 않는다.
+- API/저장소 호출을 views/pages에서 직접 수행하지 않는다. (컨트롤러/유스케이스 경유)
