@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/plan_controller.dart';
 import '../../widgets/plan_card.dart';
+import '../../../../../core/i18n/strings.dart';
 
 class PlanListSection extends StatelessWidget {
   const PlanListSection({super.key});
@@ -11,7 +12,7 @@ class PlanListSection extends StatelessWidget {
     final controller = context.watch<PlanController>();
 
     if (controller.plans.isEmpty) {
-      return const Center(child: Text('등록된 계획이 없습니다.'));
+      return Center(child: Text(Strings.Plan.emptyList));
     }
 
     return ListView.builder(
@@ -36,16 +37,16 @@ class PlanListSection extends StatelessWidget {
               context: context,
               builder:
                   (ctx) => AlertDialog(
-                    title: const Text('삭제 확인'),
-                    content: const Text('정말로 이 여행 계획을 삭제하시겠습니까?!!!'),
+                    title: Text(Strings.Plan.confirmDeleteTitle),
+                    content: Text(Strings.Plan.confirmDeleteContent),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.of(ctx).pop(false),
-                        child: const Text('취소'),
+                        child: Text(Strings.Common.cancel),
                       ),
                       TextButton(
                         onPressed: () => Navigator.of(ctx).pop(true),
-                        child: const Text('삭제'),
+                        child: Text(Strings.Common.delete),
                       ),
                     ],
                   ),
@@ -55,7 +56,7 @@ class PlanListSection extends StatelessWidget {
             await controller.deletePlan(p.id);
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(const SnackBar(content: Text('여행 계획이 삭제되었습니다.')));
+            ).showSnackBar(SnackBar(content: Text(Strings.Plan.deletedSnack)));
           },
           child: PlanCard(
             id: p.id,

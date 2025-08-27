@@ -8,6 +8,7 @@ class DateRangePicker extends StatefulWidget {
   final DateTime? firstDay;
   final DateTime? lastDay;
   final String? title;
+  final bool expanded;
 
   const DateRangePicker({
     super.key,
@@ -16,6 +17,7 @@ class DateRangePicker extends StatefulWidget {
     this.firstDay,
     this.lastDay,
     this.title,
+    this.expanded = true,
   });
 
   @override
@@ -59,50 +61,55 @@ class _DateRangePickerState extends State<DateRangePicker> {
             style: const TextStyle(fontSize: 16),
           ),
         const SizedBox(height: 16),
-        Expanded(
-          child: TableCalendar(
-            firstDay: first,
-            lastDay: last,
-            focusedDay: _rangeStart ?? now,
-            calendarFormat: CalendarFormat.month,
-            availableCalendarFormats: const {CalendarFormat.month: 'Month'},
-            rangeStartDay: _rangeStart,
-            rangeEndDay: _rangeEnd,
-            onRangeSelected: (start, end, focusedDay) {
-              setState(() {
-                _rangeStart = start;
-                _rangeEnd = end;
-                if (_rangeStart != null && _rangeEnd != null) {
-                  widget.onRangeSelected(
-                    DateTimeRange(start: _rangeStart!, end: _rangeEnd!),
-                  );
-                }
-              });
-            },
-            rangeSelectionMode: RangeSelectionMode.enforced,
-            calendarStyle: const CalendarStyle(
-              rangeHighlightColor: Colors.greenAccent,
-              rangeStartDecoration: BoxDecoration(
-                color: Colors.green,
-                shape: BoxShape.circle,
-              ),
-              rangeEndDecoration: BoxDecoration(
-                color: Colors.green,
-                shape: BoxShape.circle,
-              ),
-              todayDecoration: BoxDecoration(
-                color: Colors.orange,
-                shape: BoxShape.circle,
-              ),
-            ),
-            headerStyle: const HeaderStyle(
-              formatButtonVisible: false,
-              titleCentered: true,
-            ),
-          ),
-        ),
+        if (widget.expanded)
+          Expanded(child: _buildCalendar(first, last, now))
+        else
+          _buildCalendar(first, last, now),
         const SizedBox(height: 16),
       ],
+    );
+  }
+
+  Widget _buildCalendar(DateTime first, DateTime last, DateTime now) {
+    return TableCalendar(
+      firstDay: first,
+      lastDay: last,
+      focusedDay: _rangeStart ?? now,
+      calendarFormat: CalendarFormat.month,
+      availableCalendarFormats: const {CalendarFormat.month: 'Month'},
+      rangeStartDay: _rangeStart,
+      rangeEndDay: _rangeEnd,
+      onRangeSelected: (start, end, focusedDay) {
+        setState(() {
+          _rangeStart = start;
+          _rangeEnd = end;
+          if (_rangeStart != null && _rangeEnd != null) {
+            widget.onRangeSelected(
+              DateTimeRange(start: _rangeStart!, end: _rangeEnd!),
+            );
+          }
+        });
+      },
+      rangeSelectionMode: RangeSelectionMode.enforced,
+      calendarStyle: const CalendarStyle(
+        rangeHighlightColor: Colors.greenAccent,
+        rangeStartDecoration: BoxDecoration(
+          color: Colors.green,
+          shape: BoxShape.circle,
+        ),
+        rangeEndDecoration: BoxDecoration(
+          color: Colors.green,
+          shape: BoxShape.circle,
+        ),
+        todayDecoration: BoxDecoration(
+          color: Colors.orange,
+          shape: BoxShape.circle,
+        ),
+      ),
+      headerStyle: const HeaderStyle(
+        formatButtonVisible: false,
+        titleCentered: true,
+      ),
     );
   }
 }

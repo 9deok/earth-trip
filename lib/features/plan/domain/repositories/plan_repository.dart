@@ -4,4 +4,10 @@ import '../entities/plan_entity.dart';
 abstract class PlanRepository {
   /// 다가오는 여행 계획 리스트 반환 계약
   Future<List<PlanEntity>> getUpcomingPlans();
+
+  /// 사용자 여행 계획 저장
+  Future<void> savePlan(PlanEntity plan);
+
+  /// 사용자 여행 계획 삭제 (id 기준)
+  Future<void> deletePlan(String id);
 }

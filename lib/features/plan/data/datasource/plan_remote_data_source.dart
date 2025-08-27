@@ -6,4 +6,6 @@ abstract class PlanRemoteDataSource {
   Future<List<PlanEntity>> fetchUpcomingPlans();
 
   Future<void> saveUserPlan(PlanEntity plan);
+
+  Future<void> deleteUserPlan(String id);
 }

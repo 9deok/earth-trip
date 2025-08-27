@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'core/widgets/app_scaffold.dart';
 import 'app_providers.dart';
+import 'core/i18n/strings.dart';
 
 void main() {
   initializeDateFormatting('ko_KR'); // 한국어 로케일 데이터 초기화
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MultiProvider(
     providers: appProviders,
     child: MaterialApp(
-      title: 'Travel Planner',
+      title: Strings.appTitle,
       theme: ThemeData(primarySwatch: Colors.green),
       home: const AppScaffold(),
     ),

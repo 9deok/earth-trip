@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'bottom_nav_bar.dart';
+import '../i18n/strings.dart';
 import '../../features/plan/presentation/pages/plan_page.dart';
 
 class AppScaffold extends StatefulWidget {

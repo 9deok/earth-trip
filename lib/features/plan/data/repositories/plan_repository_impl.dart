@@ -12,4 +12,14 @@ class PlanRepositoryImpl implements PlanRepository {
   Future<List<PlanEntity>> getUpcomingPlans() {
     return remoteDataSource.fetchUpcomingPlans();
   }
+
+  @override
+  Future<void> savePlan(PlanEntity plan) {
+    return remoteDataSource.saveUserPlan(plan);
+  }
+
+  @override
+  Future<void> deletePlan(String id) {
+    return remoteDataSource.deleteUserPlan(id);
+  }
 }

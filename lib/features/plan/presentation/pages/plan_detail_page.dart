@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/i18n/strings.dart';
 import 'package:uuid/uuid.dart';
 import '../../domain/entities/daily_plan_entity.dart';
 import '../widgets/trip_summary_header.dart';
@@ -63,23 +64,23 @@ class _PlanDetailPageState extends State<PlanDetailPage> {
       context: context,
       builder:
           (context) => AlertDialog(
-            title: const Text('여행 제목 수정'),
+            title: Text(Strings.Plan.addPlan),
             content: TextField(
               controller: TextEditingController(text: _title),
-              decoration: const InputDecoration(hintText: '여행 제목을 입력하세요'),
+              decoration: InputDecoration(hintText: Strings.Plan.addPlan),
               onChanged: (value) => _title = value,
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('취소'),
+                child: Text(Strings.Common.cancel),
               ),
               TextButton(
                 onPressed: () {
                   setState(() {});
                   Navigator.pop(context);
                 },
-                child: const Text('저장'),
+                child: Text(Strings.Common.add),
               ),
             ],
           ),

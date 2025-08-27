@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/widgets/date_range_picker.dart';
+import '../../../../core/i18n/strings.dart';
 
 class DateRangeSelectStep extends StatelessWidget {
   final DateTimeRange? selectedRange;
@@ -16,7 +17,7 @@ class DateRangeSelectStep extends StatelessWidget {
     return DateRangePicker(
       initialRange: selectedRange,
       onRangeSelected: onRangeSelected,
-      title: '여행 일정을 선택하세요',
+      title: Strings.Plan.selectDateRangeTitle,
     );
   }
 }

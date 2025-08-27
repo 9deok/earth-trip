@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../controllers/plan_controller.dart';
 import '../widgets/add_plan_button.dart';
 import 'sections/plan_list_section.dart';
+import '../../../../core/i18n/strings.dart';
 
 class PlanView extends StatefulWidget {
   const PlanView({super.key});
@@ -21,7 +22,7 @@ class _PlanViewState extends State<PlanView> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('내 계획')),
+      appBar: AppBar(title: Text(Strings.Plan.myPlans)),
       body: const PlanListSection(),
       floatingActionButton: const AddPlanButton(),
     );

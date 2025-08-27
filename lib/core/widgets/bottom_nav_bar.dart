@@ -1,5 +1,7 @@
 // lib/core/widgets/bottom_nav_bar.dart
 import 'package:flutter/material.dart';
+import '../theme/colors.dart';
+import '../i18n/strings.dart';
 
 /// 앱의 주요 화면 전환을 위한 하단 네비게이션 바 위젯
 class BottomNavBar extends StatelessWidget {
@@ -18,14 +20,29 @@ class BottomNavBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       currentIndex: currentIndex,
       onTap: onTap,
-      selectedItemColor: Colors.green,
+      selectedItemColor: AppColors.primary,
       unselectedItemColor: Colors.grey,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-        BottomNavigationBarItem(icon: Icon(Icons.book), label: '일기'),
-        BottomNavigationBarItem(icon: Icon(Icons.map), label: '내 계획'),
-        BottomNavigationBarItem(icon: Icon(Icons.chat), label: '채팅'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: '계정'),
+      items: [
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.home),
+          label: Strings.Nav.home,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.book),
+          label: Strings.Nav.diary,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.map),
+          label: Strings.Nav.plans,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.chat),
+          label: Strings.Nav.chat,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.person),
+          label: Strings.Nav.account,
+        ),
       ],
     );
   }

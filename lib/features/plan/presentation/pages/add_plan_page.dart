@@ -1,10 +1,11 @@
-import 'package:earth_trip/features/plan/data/datasource/plan_remote_data_source.dart';
+import 'package:earth_trip/features/plan/domain/usecases/save_plan_use_case.dart';
 import 'package:earth_trip/features/plan/domain/entities/plan_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/place_select_step.dart';
 import '../widgets/date_range_select_step.dart';
 import 'package:uuid/uuid.dart';
+import '../../../../core/i18n/strings.dart';
 
 class AddPlanPage extends StatefulWidget {
   const AddPlanPage({super.key});
@@ -66,9 +67,15 @@ class _AddPlanPageState extends State<AddPlanPage> {
         likes: 0,
         participants: 1,
       );
-      final dataSource = context.read<PlanRemoteDataSource>();
-      await dataSource.saveUserPlan(plan);
-      Navigator.pop(context, plan);
+      try {
+        final save = context.read<SavePlanUseCase>();
+        await save.call(plan);
+        Navigator.pop(context, plan);
+      } catch (e) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(Strings.Errors.saveFailed)));
+      }
     }
   }
 
@@ -90,7 +97,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('여행 계획 추가'),
+        title: Text(Strings.Plan.addPlan),
         leading:
             _step > 0
                 ? IconButton(
@@ -135,7 +142,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
               _onComplete();
             }
           },
-          child: Text(_step == 0 ? '다음' : '완료'),
+          child: Text(_step == 0 ? Strings.Plan.next : Strings.Plan.complete),
         ),
       ),
     );

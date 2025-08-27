@@ -34,4 +34,15 @@ class PlanRemoteDataSourceImpl implements PlanRemoteDataSource {
     userPlans.add(plan.toJson());
     await prefs.setString('userPlans', jsonEncode(userPlans));
   }
+
+  @override
+  Future<void> deleteUserPlan(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final userPlansJson = prefs.getString('userPlans');
+    if (userPlansJson == null) return;
+    final List<Map<String, dynamic>> userPlans =
+        List<Map<String, dynamic>>.from(jsonDecode(userPlansJson));
+    userPlans.removeWhere((e) => e['id'] == id);
+    await prefs.setString('userPlans', jsonEncode(userPlans));
+  }
 }

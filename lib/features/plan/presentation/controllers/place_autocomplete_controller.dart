@@ -17,19 +17,26 @@ class PlaceAutocompleteController extends ChangeNotifier {
 
   List<String> _suggestions = const [];
   List<String> get suggestions => _suggestions;
+  int _debounceMs = 200;
+  int _lastIssued = 0;
 
   void updateQuery(String value, List<String> alreadySelected) {
-    if (value.isEmpty) {
-      _suggestions = const [];
-    } else {
-      _suggestions = _allPlaces
-          .where(
-            (place) =>
-                place.contains(value) && !alreadySelected.contains(place),
-          )
-          .toList(growable: false);
-    }
-    notifyListeners();
+    final now = DateTime.now().microsecondsSinceEpoch;
+    _lastIssued = now;
+    Future.delayed(Duration(milliseconds: _debounceMs), () {
+      if (_lastIssued != now) return;
+      if (value.isEmpty) {
+        _suggestions = const [];
+      } else {
+        _suggestions = _allPlaces
+            .where(
+              (place) =>
+                  place.contains(value) && !alreadySelected.contains(place),
+            )
+            .toList(growable: false);
+      }
+      notifyListeners();
+    });
   }
 
   void clear() {
