@@ -6,6 +6,7 @@ class Strings {
   static const Plan = _Plan();
   static const Nav = _Nav();
   static const Errors = _Errors();
+  static const Diary = _Diary();
 }
 
 class _Common {
@@ -48,4 +49,18 @@ class _Errors {
   const _Errors();
   final String saveFailed = '저장에 실패했습니다. 잠시 후 다시 시도해주세요.';
   final String deleteFailed = '삭제에 실패했습니다. 잠시 후 다시 시도해주세요.';
+}
+
+class _Diary {
+  const _Diary();
+  final String title = '내 여행 기록';
+  final String writeToday = '오늘의 일기 쓰기';
+  final String entryPlaceholder = '오늘의 기록 (최대 300자)';
+  final String entryRequired = '내용을 입력하세요';
+  final String mood = '기분';
+  final String date = '날짜';
+  final String save = '저장';
+  final String edit = '편집';
+  final String delete = '삭제';
+  final String confirmDelete = '이 일기를 삭제할까요?';
 }
