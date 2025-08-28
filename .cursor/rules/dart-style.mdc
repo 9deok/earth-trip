@@ -1,6 +1,7 @@
 ---
 globs: *.dart
 description: Dart/Flutter 코딩 스타일 및 관례
+alwaysApply: true
 ---
 
 ## 스타일 가이드

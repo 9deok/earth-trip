@@ -1,6 +1,7 @@
 ---
 globs: lib/**/presentation/widgets/**/*.dart,lib/core/**/*.dart
 description: UI 스타일 분리/토큰화 규칙
+alwaysApply: true
 ---
 
 ## 목표

@@ -1,6 +1,7 @@
 ---
 globs: lib/**/presentation/**/*.dart
 description: Presentation 계층 디렉터리/역할 구분 규칙
+alwaysApply: true
 ---
 
 ## 목적

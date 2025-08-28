@@ -1,6 +1,7 @@
 ---
 globs: pubspec.yaml,lib/**/*.dart
 description: 에셋 등록/참조 및 국제화 초기화 규칙
+alwaysApply: true
 ---
 
 ## 에셋 사용

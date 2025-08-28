@@ -1,6 +1,7 @@
 ---
 globs: lib/**/*.dart
 description: Provider 기반 DI/상태관리 규칙
+alwaysApply: true
 ---
 
 ## DI 구성
