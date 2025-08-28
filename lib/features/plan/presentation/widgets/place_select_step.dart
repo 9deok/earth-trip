@@ -21,7 +21,6 @@ class PlaceSelectStep extends StatefulWidget {
 
 class _PlaceSelectStepState extends State<PlaceSelectStep> {
   final TextEditingController _controller = TextEditingController();
-  List<String> _suggestions = [];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,6 @@ class _PlaceSelectStepState extends State<PlaceSelectStep> {
       child: Consumer<PlaceAutocompleteController>(
         builder: (ctx, ac, _) {
           final suggestions = ac.suggestions;
-          _suggestions = suggestions; // keep local for direct-add condition
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

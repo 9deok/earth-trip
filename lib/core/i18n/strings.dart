@@ -63,4 +63,11 @@ class _Diary {
   final String edit = '편집';
   final String delete = '삭제';
   final String confirmDelete = '이 일기를 삭제할까요?';
+  // 추가 문자열
+  final String confirmDeleteTitle = '삭제 확인';
+  final String updatedSuccess = '수정되었습니다.';
+  final String deletedSuccess = '삭제되었습니다.';
+  final String addPhoto = '사진 추가';
+  final String entryCountPrefix = '글';
+  final String entryCountSuffix = '개';
 }

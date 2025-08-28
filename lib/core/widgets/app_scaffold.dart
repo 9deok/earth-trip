@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'bottom_nav_bar.dart';
-import '../i18n/strings.dart';
 import '../../features/plan/presentation/pages/plan_page.dart';
 import '../../features/diary/presentation/pages/diary_page.dart';
 
@@ -8,7 +7,7 @@ class AppScaffold extends StatefulWidget {
   const AppScaffold({super.key});
 
   @override
-  _AppScaffoldState createState() => _AppScaffoldState();
+  State<AppScaffold> createState() => _AppScaffoldState();
 }
 
 class _AppScaffoldState extends State<AppScaffold> {
@@ -16,8 +15,8 @@ class _AppScaffoldState extends State<AppScaffold> {
 
   static final _pages = <Widget>[
     Center(child: Text('Home')),
-    DiaryPage(),
-    PlanPage(),
+    const DiaryPage(),
+    const PlanPage(),
     Center(child: Text('Chat')),
     Center(child: Text('Account')),
   ];

@@ -53,10 +53,11 @@ class PlanListSection extends StatelessWidget {
             );
           },
           onDismissed: (direction) async {
+            final messenger = ScaffoldMessenger.of(context);
             await controller.deletePlan(p.id);
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(Strings.Plan.deletedSnack)));
+            messenger.showSnackBar(
+              SnackBar(content: Text(Strings.Plan.deletedSnack)),
+            );
           },
           child: PlanCard(
             id: p.id,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/theme/colors.dart';
 import '../../../../../core/theme/spacing.dart';
 
 class TripSummaryHeaderStyles {
@@ -10,7 +9,7 @@ class TripSummaryHeaderStyles {
     image: NetworkImage(imageUrl),
     fit: BoxFit.cover,
     colorFilter: ColorFilter.mode(
-      Colors.black.withOpacity(0.4),
+      Colors.black.withValues(alpha: 0.4),
       BlendMode.darken,
     ),
   );

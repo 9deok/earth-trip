@@ -14,6 +14,9 @@ import 'features/diary/domain/repositories/diary_repository.dart';
 import 'features/diary/data/repositories/diary_repository_impl.dart';
 import 'features/diary/domain/usecases/get_diary_by_month_use_case.dart';
 import 'features/diary/domain/usecases/save_diary_use_case.dart';
+import 'features/diary/domain/usecases/get_diary_trips_use_case.dart';
+import 'features/diary/domain/usecases/get_diary_by_plan_use_case.dart';
+import 'features/diary/domain/usecases/delete_diary_use_case.dart';
 
 final appProviders = [
   // PlanRemoteDataSource Provider 추가 (구현체로 대체)
@@ -43,6 +46,15 @@ final appProviders = [
   ),
   Provider<SaveDiaryUseCase>(
     create: (context) => SaveDiaryUseCase(context.read<DiaryRepository>()),
+  ),
+  Provider<GetDiaryTripsUseCase>(
+    create: (context) => GetDiaryTripsUseCase(context.read<DiaryRepository>()),
+  ),
+  Provider<GetDiaryByPlanUseCase>(
+    create: (context) => GetDiaryByPlanUseCase(context.read<DiaryRepository>()),
+  ),
+  Provider<DeleteDiaryUseCase>(
+    create: (context) => DeleteDiaryUseCase(context.read<DiaryRepository>()),
   ),
   // 다른 Provider도 여기에 추가
 ];

@@ -3,39 +3,28 @@ import '../../domain/entities/diary_entry_entity.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/i18n/strings.dart';
 
-class DiaryEntryPayload {
-  final DateTime date;
-  final int moodScore;
-  final String text;
-  final String? photoUrl;
-  const DiaryEntryPayload({
-    required this.date,
-    required this.moodScore,
-    required this.text,
-    this.photoUrl,
-  });
-
-  DiaryEntryEntity toEntity(String planId) => DiaryEntryEntity.createNew(
-    date: date,
-    moodScore: moodScore,
-    text: text,
-    photoUrl: photoUrl,
-    planId: planId,
-  );
-}
-
 class DiaryEntryForm extends StatefulWidget {
-  const DiaryEntryForm({super.key});
+  final String planId;
+  final DiaryEntryEntity? initial;
+  const DiaryEntryForm({super.key, required this.planId, this.initial});
   @override
   State<DiaryEntryForm> createState() => _DiaryEntryFormState();
 }
 
 class _DiaryEntryFormState extends State<DiaryEntryForm> {
   final _formKey = GlobalKey<FormState>();
-  DateTime _date = DateTime.now();
+  late DateTime _date;
   int _mood = 3;
   String _text = '';
   XFile? _image;
+
+  @override
+  void initState() {
+    super.initState();
+    _date = widget.initial?.date ?? DateTime.now();
+    _mood = widget.initial?.moodScore ?? 3;
+    _text = widget.initial?.text ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +87,7 @@ class _DiaryEntryFormState extends State<DiaryEntryForm> {
                         if (x != null) setState(() => _image = x);
                       },
                       icon: const Icon(Icons.photo),
-                      label: const Text('사진 추가'),
+                      label: Text(Strings.Diary.addPhoto),
                     ),
                     const SizedBox(width: 12),
                     if (_image != null)
@@ -121,7 +110,9 @@ class _DiaryEntryFormState extends State<DiaryEntryForm> {
                   ),
                   validator:
                       (v) =>
-                          (v == null || v.trim().isEmpty) ? '내용을 입력하세요' : null,
+                          (v == null || v.trim().isEmpty)
+                              ? Strings.Diary.entryRequired
+                              : null,
                   onChanged: (v) => _text = v,
                 ),
                 const SizedBox(height: 12),
@@ -130,16 +121,30 @@ class _DiaryEntryFormState extends State<DiaryEntryForm> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (!_formKey.currentState!.validate()) return;
-                      Navigator.pop(
-                        context,
-                        DiaryEntryPayload(
+                      final photoUrl = _image?.path ?? widget.initial?.photoUrl;
+                      DiaryEntryEntity entity;
+                      if (widget.initial != null) {
+                        entity = DiaryEntryEntity(
+                          id: widget.initial!.id,
                           date: _date,
                           moodScore: _mood,
                           text: _text,
-                        ),
-                      );
+                          photoUrl: photoUrl,
+                          planId: widget.planId,
+                          isRetrospective: widget.initial!.isRetrospective,
+                        );
+                      } else {
+                        entity = DiaryEntryEntity.createNew(
+                          date: _date,
+                          moodScore: _mood,
+                          text: _text,
+                          photoUrl: photoUrl,
+                          planId: widget.planId,
+                        );
+                      }
+                      Navigator.pop(context, entity);
                     },
-                    child: const Text('저장'),
+                    child: Text(Strings.Diary.save),
                   ),
                 ),
               ],

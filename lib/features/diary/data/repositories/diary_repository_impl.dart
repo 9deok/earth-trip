@@ -15,4 +15,11 @@ class DiaryRepositoryImpl implements DiaryRepository {
 
   @override
   Future<void> save(DiaryEntryEntity entry) => local.save(entry);
+
+  @override
+  Future<List<DiaryEntryEntity>> listByPlan(String planId) =>
+      local.listByPlan(planId);
+
+  @override
+  Future<List<DiaryEntryEntity>> listAll() => local.listAll();
 }

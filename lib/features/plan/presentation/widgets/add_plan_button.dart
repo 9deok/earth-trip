@@ -18,7 +18,8 @@ class AddPlanButton extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const AddPlanPage()),
           );
           if (result != null) {
-            await context.read<PlanController>().loadPlans();
+            final controller = context.read<PlanController>();
+            await controller.loadPlans();
             // 상태 갱신을 위해 setState를 사용할 수 없으므로, PlanController에서 notifyListeners()를 활용하세요.
           }
         },

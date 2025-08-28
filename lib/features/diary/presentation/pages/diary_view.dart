@@ -13,7 +13,6 @@ class DiaryView extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.watch<DiaryController>();
     if (c.isLoading) return const Center(child: CircularProgressIndicator());
-    final monthFmt = DateFormat('yyyy.MM');
 
     return Scaffold(
       appBar: AppBar(title: Text(Strings.Diary.title)),
@@ -36,14 +35,13 @@ class DiaryView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final result = await showModalBottomSheet<DiaryEntryPayload>(
+          final entity = await showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            builder: (_) => const DiaryEntryForm(),
+            builder: (_) => const DiaryEntryForm(planId: 'default-plan'),
           );
-          if (result != null) {
-            // 임시: 단일 여행 컨텍스트가 없으므로 기본 planId 사용(추후 라우팅에서 주입)
-            await c.addOrUpdate(result.toEntity('default-plan'));
+          if (entity != null) {
+            await c.addOrUpdate(entity);
           }
         },
         child: const Icon(Icons.add),

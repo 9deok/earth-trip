@@ -69,12 +69,14 @@ class _AddPlanPageState extends State<AddPlanPage> {
       );
       try {
         final save = context.read<SavePlanUseCase>();
+        final navigator = Navigator.of(context);
         await save.call(plan);
-        Navigator.pop(context, plan);
+        navigator.pop(plan);
       } catch (e) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(Strings.Errors.saveFailed)));
+        final messenger = ScaffoldMessenger.of(context);
+        messenger.showSnackBar(
+          SnackBar(content: Text(Strings.Errors.saveFailed)),
+        );
       }
     }
   }

@@ -32,6 +32,32 @@ class DiaryLocalDataSourceImpl implements DiaryLocalDataSource {
   }
 
   @override
+  Future<List<DiaryEntryEntity>> listByPlan(String planId) async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_key);
+    if (raw == null) return [];
+    final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+    final entries =
+        list
+            .map(DiaryEntryEntity.fromJson)
+            .where((e) => e.planId == planId)
+            .toList();
+    entries.sort((a, b) => a.date.compareTo(b.date));
+    return entries;
+  }
+
+  @override
+  Future<List<DiaryEntryEntity>> listAll() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_key);
+    if (raw == null) return [];
+    final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+    final entries = list.map(DiaryEntryEntity.fromJson).toList();
+    entries.sort((a, b) => a.date.compareTo(b.date));
+    return entries;
+  }
+
+  @override
   Future<void> save(DiaryEntryEntity entry) async {
     final prefs = await SharedPreferences.getInstance();
     final raw = prefs.getString(_key);

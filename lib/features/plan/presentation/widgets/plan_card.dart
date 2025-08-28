@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'styles/plan_card_styles.dart';
 import 'plan_card_header.dart';
 import 'plan_card_date_range.dart';
@@ -38,8 +37,6 @@ class PlanCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateFormat = DateFormat('yyyy-MM-dd');
-
     return GestureDetector(
       onTap: () {
         Navigator.push(
