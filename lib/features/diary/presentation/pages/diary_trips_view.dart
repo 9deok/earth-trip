@@ -94,6 +94,7 @@ class _DiaryTripsViewState extends State<DiaryTripsView> {
               plan: plan,
               dateFmt: dateFmt,
               buildImage: _buildImage,
+              onChanged: () => setState(() {}),
             );
           },
         );
@@ -107,12 +108,14 @@ class _DiaryTripCard extends StatefulWidget {
   final PlanEntity? plan;
   final DateFormat dateFmt;
   final Widget Function(String? url, {double height}) buildImage;
+  final VoidCallback? onChanged;
 
   const _DiaryTripCard({
     required this.summary,
     required this.plan,
     required this.dateFmt,
     required this.buildImage,
+    this.onChanged,
   });
 
   @override
@@ -139,7 +142,10 @@ class _DiaryTripCardState extends State<_DiaryTripCard> {
             context,
             MaterialPageRoute(builder: (_) => DiaryTripView(planId: t.planId)),
           );
-          if (changed == true) setState(() {});
+          if (changed == true) {
+            setState(() {});
+            widget.onChanged?.call();
+          }
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,33 +188,56 @@ class _DiaryTripCardState extends State<_DiaryTripCard> {
                   return Column(
                     children: [
                       SizedBox(
-                        height: 200,
+                        height: 260,
                         child: PageView.builder(
                           onPageChanged: (i) => setState(() => _current = i),
                           itemCount: entries.length,
                           itemBuilder: (context, index) {
                             final e = entries[index];
-                            return Stack(
+                            final raw = e.text.trim();
+                            final preview =
+                                raw.length > 50
+                                    ? '${raw.substring(0, 50)}…'
+                                    : raw;
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                widget.buildImage(e.photoUrl, height: 200),
-                                Positioned(
-                                  right: 8,
-                                  bottom: 8,
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                      vertical: 4,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.black45,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Text(
-                                      dayFmt.format(e.date),
-                                      style: const TextStyle(
-                                        color: Colors.white,
+                                Stack(
+                                  children: [
+                                    widget.buildImage(e.photoUrl, height: 200),
+                                    Positioned(
+                                      right: 8,
+                                      bottom: 8,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 4,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.black45,
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          dayFmt.format(e.date),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
                                     ),
+                                  ],
+                                ),
+                                const SizedBox(height: 8),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                  ),
+                                  child: Text(
+                                    preview,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ],

@@ -47,18 +47,23 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
     super.dispose();
   }
 
-  Widget _buildImage(String? url) {
-    if (url == null) return Container(height: 180, color: Colors.black12);
+  Widget _buildImage(String? url, {required double height}) {
+    if (url == null) return Container(height: height, color: Colors.black12);
     if (url.startsWith('http')) {
       return CachedNetworkImage(
         imageUrl: url,
         fit: BoxFit.cover,
-        placeholder: (c, _) => Container(height: 180, color: Colors.black12),
+        placeholder: (c, _) => Container(height: height, color: Colors.black12),
         errorWidget:
-            (c, _, __) => Container(height: 180, color: Colors.black12),
+            (c, _, __) => Container(height: height, color: Colors.black12),
       );
     }
-    return Image.file(File(url), fit: BoxFit.cover);
+    return Image.file(
+      File(url),
+      fit: BoxFit.cover,
+      height: height,
+      width: double.infinity,
+    );
   }
 
   @override
@@ -69,6 +74,8 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
     }
     final entries = c.entries;
     final plansUseCase = context.read<GetPlansUseCase>();
+    final screenWidth = MediaQuery.of(context).size.width;
+    final imageHeight = screenWidth * 9 / 16; // 16:9 비율
     return Scaffold(
       appBar: AppBar(title: Text(Strings.Diary.title)),
       body: FutureBuilder<List<PlanEntity>>(
@@ -127,6 +134,7 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
+                              height: imageHeight,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 boxShadow: const [
@@ -140,7 +148,7 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
                               clipBehavior: Clip.antiAlias,
                               child: Stack(
                                 children: [
-                                  _buildImage(e.photoUrl),
+                                  _buildImage(e.photoUrl, height: imageHeight),
                                   Positioned(
                                     right: 8,
                                     bottom: 8,
