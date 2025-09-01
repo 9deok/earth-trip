@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/theme/spacing.dart';
+import '../../../../../core/theme/text_styles.dart';
 
 class DailyPlanCardStyles {
   static const double imageHeight = 120;
 
-  static EdgeInsetsGeometry cardMargin = const EdgeInsets.symmetric(
-    horizontal: 16,
-    vertical: 8,
+  static const EdgeInsets cardMargin = EdgeInsets.symmetric(
+    horizontal: AppSpacing.md,
+    vertical: AppSpacing.sm,
   );
-  static EdgeInsetsGeometry contentPadding = const EdgeInsets.all(12);
+  static const EdgeInsets contentPadding = EdgeInsets.all(AppSpacing.md);
 
-  static RoundedRectangleBorder cardShape = RoundedRectangleBorder(
+  static final RoundedRectangleBorder cardShape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(AppRadii.lg),
   );
-  static BorderRadius imageTopRadius = BorderRadius.vertical(
+  static final BorderRadius imageTopRadius = BorderRadius.vertical(
     top: Radius.circular(AppRadii.lg),
   );
 
@@ -27,8 +28,24 @@ class DailyPlanCardStyles {
   static TextStyle dayBadgeTextStyle(BuildContext context) =>
       TextStyle(color: AppColors.primary.shade800, fontWeight: FontWeight.bold);
 
-  static CalendarStyles calendarStyles(BuildContext context) =>
-      CalendarStyles();
+  static const SizedBox gapXs = SizedBox(width: AppSpacing.xs);
+  static const SizedBox gapSm = SizedBox(width: AppSpacing.sm);
+  static const SizedBox gapMd = SizedBox(width: AppSpacing.md);
+  static const SizedBox gapVSm = SizedBox(height: AppSpacing.sm);
+  static const SizedBox gapVMd = SizedBox(height: AppSpacing.md);
+
+  static const TextStyle dateTextStyle = TextStyle(
+    color: AppColors.textSecondary,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle summaryTextStyle = AppTextStyles.bodyMd;
+
+  static const Color iconPlace = Colors.red;
+  static const Color iconMeal = Colors.orange;
+  static const Color iconMove = Colors.blue;
+
+  static const TextStyle metaCountTextStyle = AppTextStyles.bodyMd;
 }
 
 class CalendarStyles {}

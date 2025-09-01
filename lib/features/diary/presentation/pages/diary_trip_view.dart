@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
 import '../controllers/diary_trip_controller.dart';
 import '../../domain/usecases/get_diary_by_plan_use_case.dart';
 import '../../domain/usecases/save_diary_use_case.dart';
@@ -11,6 +9,8 @@ import '../widgets/diary_entry_form.dart';
 import '../../../plan/domain/usecases/get_plans_use_case.dart';
 import '../../../plan/domain/entities/plan_entity.dart';
 import '../../../../core/i18n/strings.dart';
+import '../../../../core/widgets/adaptive_image.dart';
+import '../widgets/styles/diary_trip_view_styles.dart';
 
 class DiaryTripView extends StatelessWidget {
   final String planId;
@@ -47,24 +47,12 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
     super.dispose();
   }
 
-  Widget _buildImage(String? url, {required double height}) {
-    if (url == null) return Container(height: height, color: Colors.black12);
-    if (url.startsWith('http')) {
-      return CachedNetworkImage(
-        imageUrl: url,
-        fit: BoxFit.cover,
-        placeholder: (c, _) => Container(height: height, color: Colors.black12),
-        errorWidget:
-            (c, _, __) => Container(height: height, color: Colors.black12),
-      );
-    }
-    return Image.file(
-      File(url),
-      fit: BoxFit.cover,
-      height: height,
-      width: double.infinity,
-    );
-  }
+  Widget _buildImage(String? url, {required double height}) => AdaptiveImage(
+    urlOrPath: url,
+    height: height,
+    width: double.infinity,
+    fit: BoxFit.cover,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -107,14 +95,11 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
                   children: [
                     Text(
                       plan.title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: DiaryTripViewStyles.headerTitleStyle,
                     ),
                     Text(
                       '${DateFormat('yy.MM.dd').format(plan.start)} ~ ${DateFormat('yy.MM.dd').format(plan.end)}',
-                      style: const TextStyle(color: Colors.black54),
+                      style: DiaryTripViewStyles.headerMetaStyle,
                     ),
                   ],
                 ),
@@ -136,14 +121,9 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
                             Container(
                               height: imageHeight,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 8,
-                                    offset: Offset(0, 4),
-                                  ),
-                                ],
+                                borderRadius:
+                                    DiaryTripViewStyles.imageBorderRadius,
+                                boxShadow: DiaryTripViewStyles.imageShadow,
                               ),
                               clipBehavior: Clip.antiAlias,
                               child: Stack(
@@ -159,7 +139,9 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
                                       ),
                                       decoration: BoxDecoration(
                                         color: Colors.black45,
-                                        borderRadius: BorderRadius.circular(8),
+                                        borderRadius:
+                                            DiaryTripViewStyles
+                                                .imageBorderRadius,
                                       ),
                                       child: Text(
                                         dayFmt.format(e.date),

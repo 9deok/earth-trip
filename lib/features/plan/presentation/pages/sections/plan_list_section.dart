@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../controllers/plan_controller.dart';
 import '../../widgets/plan_card.dart';
 import '../../../../../core/i18n/strings.dart';
+import '../../widgets/styles/plan_list_section_styles.dart';
 
 class PlanListSection extends StatelessWidget {
   const PlanListSection({super.key});
@@ -12,24 +13,30 @@ class PlanListSection extends StatelessWidget {
     final controller = context.watch<PlanController>();
 
     if (controller.plans.isEmpty) {
-      return Center(child: Text(Strings.Plan.emptyList));
+      return Center(
+        child: Text(
+          Strings.Plan.emptyList,
+          style: PlanListSectionStyles.emptyTextStyle,
+        ),
+      );
     }
 
     return ListView.builder(
+      padding: PlanListSectionStyles.listPadding,
       itemCount: controller.plans.length,
       itemBuilder: (context, index) {
         final p = controller.plans[index];
         final imageUrl =
             (p.imageUrl == null || p.imageUrl!.isEmpty)
-                ? 'assets/flags/default.png'
+                ? PlanListSectionStyles.defaultFlagAsset
                 : p.imageUrl!;
         return Dismissible(
           key: ValueKey(p.id),
           direction: DismissDirection.endToStart,
           background: Container(
             alignment: Alignment.centerRight,
-            color: Colors.red,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            color: PlanListSectionStyles.dismissBackground,
+            padding: PlanListSectionStyles.dismissPadding,
             child: const Icon(Icons.delete, color: Colors.white),
           ),
           confirmDismiss: (direction) async {

@@ -55,8 +55,8 @@ class PlanCard extends StatelessWidget {
         );
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        padding: const EdgeInsets.all(16),
+        margin: PlanCardStyles.cardMargin,
+        padding: PlanCardStyles.cardPadding,
         decoration: PlanCardStyles.cardDecoration(context),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

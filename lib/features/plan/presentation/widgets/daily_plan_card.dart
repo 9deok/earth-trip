@@ -61,50 +61,60 @@ class DailyPlanCard extends StatelessWidget {
                           style: DailyPlanCardStyles.dayBadgeTextStyle(context),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      DailyPlanCardStyles.gapSm,
                       Text(
                         dateFormat.format(dailyPlan.date),
-                        style: const TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: DailyPlanCardStyles.dateTextStyle,
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  DailyPlanCardStyles.gapVSm,
                   // 한줄 요약
                   Text(
                     dailyPlan.summary,
-                    style: const TextStyle(fontSize: 14),
+                    style: DailyPlanCardStyles.summaryTextStyle,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 12),
+                  DailyPlanCardStyles.gapVMd,
                   // 방문 장소 수, 식사 수, 이동 수
                   Row(
                     children: [
-                      const Icon(Icons.place, size: 16, color: Colors.red),
-                      const SizedBox(width: 4),
-                      Text('장소 ${dailyPlan.places.length}곳'),
-                      const SizedBox(width: 16),
-                      const Icon(
+                      Icon(
+                        Icons.place,
+                        size: 16,
+                        color: DailyPlanCardStyles.iconPlace,
+                      ),
+                      DailyPlanCardStyles.gapXs,
+                      Text(
+                        '장소 ${dailyPlan.places.length}곳',
+                        style: DailyPlanCardStyles.metaCountTextStyle,
+                      ),
+                      DailyPlanCardStyles.gapMd,
+                      Icon(
                         Icons.restaurant,
                         size: 16,
-                        color: Colors.orange,
+                        color: DailyPlanCardStyles.iconMeal,
                       ),
-                      const SizedBox(width: 4),
-                      Text('식사 ${dailyPlan.mealCount}회'),
-                      const SizedBox(width: 16),
-                      const Icon(
+                      DailyPlanCardStyles.gapXs,
+                      Text(
+                        '식사 ${dailyPlan.mealCount}회',
+                        style: DailyPlanCardStyles.metaCountTextStyle,
+                      ),
+                      DailyPlanCardStyles.gapMd,
+                      Icon(
                         Icons.directions_walk,
                         size: 16,
-                        color: Colors.blue,
+                        color: DailyPlanCardStyles.iconMove,
                       ),
-                      const SizedBox(width: 4),
-                      Text('이동 ${dailyPlan.moveCount}회'),
+                      DailyPlanCardStyles.gapXs,
+                      Text(
+                        '이동 ${dailyPlan.moveCount}회',
+                        style: DailyPlanCardStyles.metaCountTextStyle,
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  DailyPlanCardStyles.gapVSm,
                   // 상세보기 버튼
                   Align(
                     alignment: Alignment.centerRight,

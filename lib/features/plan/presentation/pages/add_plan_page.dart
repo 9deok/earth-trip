@@ -6,6 +6,7 @@ import '../widgets/place_select_step.dart';
 import '../widgets/date_range_select_step.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../core/i18n/strings.dart';
+import '../widgets/styles/add_plan_page_styles.dart';
 
 class AddPlanPage extends StatefulWidget {
   const AddPlanPage({super.key});
@@ -114,28 +115,17 @@ class _AddPlanPageState extends State<AddPlanPage> {
             (_step == 0)
                 ? SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0,
-                      vertical: 24.0,
-                    ),
+                    padding: AddPlanPageStyles.pagePadding,
                     child: stepWidget,
                   ),
                 )
                 : Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24.0,
-                    vertical: 24.0,
-                  ),
+                  padding: AddPlanPageStyles.pagePadding,
                   child: stepWidget,
                 ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(
-          left: 24.0,
-          right: 24.0,
-          bottom: MediaQuery.of(context).viewInsets.bottom + 16,
-          top: 8,
-        ),
+        padding: AddPlanPageStyles.bottomButtonPadding(context),
         child: ElevatedButton(
           onPressed: () {
             if (_step == 0 && _selectedPlaces.isNotEmpty) {
