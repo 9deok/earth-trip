@@ -56,6 +56,9 @@ class _AddPlanPageState extends State<AddPlanPage> {
 
   Future<void> _onComplete() async {
     if (_selectedPlaces.isNotEmpty && _selectedDateRange != null) {
+      final navigator = Navigator.of(context);
+      final messenger = ScaffoldMessenger.of(context);
+      final save = context.read<SavePlanUseCase>();
       final plan = PlanEntity(
         id: const Uuid().v4(), // 고유 id 생성
         title: _selectedPlaces.first,
@@ -69,12 +72,9 @@ class _AddPlanPageState extends State<AddPlanPage> {
         participants: 1,
       );
       try {
-        final save = context.read<SavePlanUseCase>();
-        final navigator = Navigator.of(context);
         await save.call(plan);
         navigator.pop(plan);
       } catch (e) {
-        final messenger = ScaffoldMessenger.of(context);
         messenger.showSnackBar(
           SnackBar(content: Text(Strings.Errors.saveFailed)),
         );

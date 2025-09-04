@@ -15,6 +15,7 @@ class _Common {
   final String cancel = '취소';
   final String delete = '삭제';
   final String add = '추가';
+  final String details = '상세보기';
 }
 
 class _Plan {
@@ -56,6 +57,7 @@ class _Diary {
   final String title = '내 여행 기록';
   final String writeToday = '오늘의 일기 쓰기';
   final String entryPlaceholder = '오늘의 기록 (최대 300자)';
+  final String entryHelper = '최대 300자까지 입력할 수 있어요';
   final String entryRequired = '내용을 입력하세요';
   final String mood = '기분';
   final String date = '날짜';
@@ -70,4 +72,9 @@ class _Diary {
   final String addPhoto = '사진 추가';
   final String entryCountPrefix = '글';
   final String entryCountSuffix = '개';
+  // Filters & badges
+  final String filterAll = '전체';
+  final String filterHasEntries = '일기 있음';
+  final String filterHasRetrospective = '회고 있음';
+  final String retrospective = '회고';
 }

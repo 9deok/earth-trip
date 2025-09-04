@@ -4,6 +4,7 @@ import 'package:uuid/uuid.dart';
 import '../../domain/entities/daily_plan_entity.dart';
 import '../widgets/trip_summary_header.dart';
 import '../widgets/daily_plan_card.dart';
+import '../widgets/styles/plan_detail_page_styles.dart';
 
 class PlanDetailPage extends StatefulWidget {
   final String planId;
@@ -110,14 +111,14 @@ class _PlanDetailPageState extends State<PlanDetailPage> {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              padding: PlanDetailPageStyles.sectionPadding,
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                borderRadius: PlanDetailPageStyles.sectionTopRadius,
               ),
               child: const Text(
                 '일자별 계획',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: PlanDetailPageStyles.sectionTitleStyle,
               ),
             ),
           ),

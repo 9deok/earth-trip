@@ -8,6 +8,12 @@ class AppTextStyles {
     color: AppColors.textPrimary,
   );
 
+  static const TextStyle titleXl = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textPrimary,
+  );
+
   static const TextStyle bodyMd = TextStyle(
     fontSize: 16,
     color: AppColors.textPrimary,

@@ -45,6 +45,23 @@ class AdaptiveImage extends StatelessWidget {
     return child;
   }
 
-  Widget _placeholder() =>
-      Container(width: width, height: height, color: Colors.black12);
+  Widget _placeholder() => Builder(
+    builder: (context) {
+      final scheme = Theme.of(context).colorScheme;
+      return Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: scheme.surfaceVariant,
+          borderRadius: borderRadius,
+        ),
+        child: Center(
+          child: Icon(
+            Icons.image_outlined,
+            color: scheme.onSurfaceVariant.withValues(alpha: 0.5),
+          ),
+        ),
+      );
+    },
+  );
 }

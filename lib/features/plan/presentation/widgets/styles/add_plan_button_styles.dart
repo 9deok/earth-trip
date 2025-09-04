@@ -8,15 +8,17 @@ class AddPlanButtonStyles {
   static const TextStyle labelTextStyle = TextStyle(fontSize: 14);
 
   static ButtonStyle buttonStyle(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return ElevatedButton.styleFrom(
-      backgroundColor: AppColors.primary,
-      padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
+      backgroundColor: scheme.primary,
+      foregroundColor: scheme.onPrimary,
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppRadii.xl),
       ),
       minimumSize: const Size(0, buttonHeight),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      elevation: 4,
+      elevation: 0,
     );
   }
 }

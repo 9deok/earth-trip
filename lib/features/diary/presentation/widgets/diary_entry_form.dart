@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../domain/entities/diary_entry_entity.dart';
 import 'package:image_picker/image_picker.dart';
@@ -59,23 +60,30 @@ class _DiaryEntryFormState extends State<DiaryEntryForm> {
                         ),
                       ),
                     ),
-                    DropdownButton<int>(
-                      value: _mood,
-                      onChanged: (v) => setState(() => _mood = v ?? 3),
-                      items:
-                          List.generate(5, (i) => i + 1)
-                              .map(
-                                (v) => DropdownMenuItem(
-                                  value: v,
-                                  child: Text('😊 $v'),
-                                ),
-                              )
-                              .toList(),
+                    Expanded(
+                      child: DropdownButtonFormField<int>(
+                        value: _mood,
+                        decoration: const InputDecoration(
+                          labelText: '기분',
+                          prefixIcon: Icon(Icons.emoji_emotions_outlined),
+                        ),
+                        onChanged: (v) => setState(() => _mood = v ?? 3),
+                        items:
+                            List.generate(5, (i) => i + 1)
+                                .map(
+                                  (v) => DropdownMenuItem(
+                                    value: v,
+                                    child: Text('😊 $v'),
+                                  ),
+                                )
+                                .toList(),
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 12),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ElevatedButton.icon(
                       onPressed: () async {
@@ -91,12 +99,31 @@ class _DiaryEntryFormState extends State<DiaryEntryForm> {
                     ),
                     const SizedBox(width: 12),
                     if (_image != null)
-                      Expanded(
-                        child: Text(
-                          _image!.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                      Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.file(
+                              File(_image!.path),
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Positioned(
+                            right: -8,
+                            top: -8,
+                            child: IconButton(
+                              visualDensity: VisualDensity.compact,
+                              style: IconButton.styleFrom(
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.surface,
+                              ),
+                              icon: const Icon(Icons.close, size: 18),
+                              onPressed: () => setState(() => _image = null),
+                            ),
+                          ),
+                        ],
                       ),
                   ],
                 ),
@@ -104,9 +131,10 @@ class _DiaryEntryFormState extends State<DiaryEntryForm> {
                 TextFormField(
                   maxLength: 300,
                   maxLines: 6,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: '오늘의 기록 (최대 300자)',
+                  decoration: InputDecoration(
+                    labelText: Strings.Diary.entryPlaceholder,
+                    prefixIcon: const Icon(Icons.notes_outlined),
+                    helperText: Strings.Diary.entryHelper,
                   ),
                   validator:
                       (v) =>

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/theme/spacing.dart';
+import '../../../../../core/theme/text_styles.dart';
 
 class PlaceSelectStepStyles {
-  static const TextStyle titleStyle = TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.bold,
+  static const TextStyle titleStyle = AppTextStyles.titleLg;
+  static const SizedBox titleSpacing = SizedBox(height: AppSpacing.md);
+  static const EdgeInsets chipPadding = EdgeInsets.symmetric(
+    horizontal: AppSpacing.sm,
   );
-  static const SizedBox titleSpacing = SizedBox(height: 16);
-  static const EdgeInsets chipPadding = EdgeInsets.symmetric(horizontal: 8);
+  static const SizedBox sectionGap = SizedBox(height: AppSpacing.lg);
 }

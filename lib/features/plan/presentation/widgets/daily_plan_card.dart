@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../domain/entities/daily_plan_entity.dart';
 import 'styles/daily_plan_card_styles.dart';
+import '../../../../core/i18n/strings.dart';
+import '../../../../core/widgets/adaptive_image.dart';
 
 class DailyPlanCard extends StatelessWidget {
   final DailyPlanEntity dailyPlan;
@@ -21,7 +23,7 @@ class DailyPlanCard extends StatelessWidget {
 
     return Card(
       margin: DailyPlanCardStyles.cardMargin,
-      elevation: 2,
+      elevation: 0,
       shape: DailyPlanCardStyles.cardShape,
       child: InkWell(
         onTap: onTap,
@@ -33,11 +35,10 @@ class DailyPlanCard extends StatelessWidget {
             // 대표 이미지
             ClipRRect(
               borderRadius: DailyPlanCardStyles.imageTopRadius,
-              child: Image.network(
-                dailyPlan.imageUrl,
+              child: AdaptiveImage(
+                urlOrPath: dailyPlan.imageUrl,
                 height: DailyPlanCardStyles.imageHeight,
                 width: double.infinity,
-                fit: BoxFit.cover,
               ),
             ),
             Padding(
@@ -121,9 +122,9 @@ class DailyPlanCard extends StatelessWidget {
                     child: TextButton.icon(
                       onPressed: onTap,
                       icon: const Icon(Icons.arrow_forward, size: 16),
-                      label: const Text('상세보기'),
+                      label: Text(Strings.Common.details),
                       style: TextButton.styleFrom(
-                        foregroundColor: Colors.green,
+                        foregroundColor: Theme.of(context).colorScheme.primary,
                         padding: EdgeInsets.zero,
                         minimumSize: const Size(0, 0),
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,

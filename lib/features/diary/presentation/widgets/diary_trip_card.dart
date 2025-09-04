@@ -92,7 +92,7 @@ class _DiaryTripCardState extends State<DiaryTripCard> {
                   return Column(
                     children: [
                       SizedBox(
-                        height: DiaryTripCardStyles.imageHeight + 60,
+                        height: DiaryTripCardStyles.imageHeight + 72,
                         child: PageView.builder(
                           onPageChanged: (i) => setState(() => _current = i),
                           itemCount: entries.length,
@@ -108,11 +108,23 @@ class _DiaryTripCardState extends State<DiaryTripCard> {
                               children: [
                                 Stack(
                                   children: [
-                                    AdaptiveImage(
-                                      urlOrPath: e.photoUrl,
-                                      height: DiaryTripCardStyles.imageHeight,
-                                      width: double.infinity,
+                                    Padding(
+                                      padding:
+                                          DiaryTripCardStyles
+                                              .imageHorizontalPadding,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            DiaryTripCardStyles
+                                                .imageInnerRadius,
+                                        child: AdaptiveImage(
+                                          urlOrPath: e.photoUrl,
+                                          height:
+                                              DiaryTripCardStyles.imageHeight,
+                                          width: double.infinity,
+                                        ),
+                                      ),
                                     ),
+
                                     Positioned(
                                       right: 8,
                                       bottom: 8,
@@ -133,7 +145,7 @@ class _DiaryTripCardState extends State<DiaryTripCard> {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 8),
+                                DiaryTripCardStyles.previewTopGap,
                                 Padding(
                                   padding: DiaryTripCardStyles.previewPadding,
                                   child: Text(
@@ -163,7 +175,10 @@ class _DiaryTripCardState extends State<DiaryTripCard> {
                                     ? DiaryTripCardStyles.indicatorDotSizeActive
                                     : DiaryTripCardStyles.indicatorDotSize,
                             decoration: BoxDecoration(
-                              color: active ? Colors.black54 : Colors.black26,
+                              color: DiaryTripCardStyles.indicatorColor(
+                                context,
+                                active,
+                              ),
                               shape: BoxShape.circle,
                             ),
                           );
@@ -200,10 +215,36 @@ class _DiaryTripCardState extends State<DiaryTripCard> {
             if (t.retrospectiveText != null)
               Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  t.retrospectiveText!,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.tertiaryContainer,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        Strings.Diary.retrospective,
+                        style: TextStyle(
+                          color:
+                              Theme.of(context).colorScheme.onTertiaryContainer,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        t.retrospectiveText!,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
               ),
           ],

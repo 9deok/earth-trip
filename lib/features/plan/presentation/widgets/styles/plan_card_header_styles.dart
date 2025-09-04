@@ -11,5 +11,5 @@ class PlanCardHeaderStyles {
 
   static const TextStyle titleStyle = AppTextStyles.bodyMd;
 
-  static const TextStyle dDayStyle = TextStyle(color: AppColors.primary);
+  static const TextStyle dDayStyle = TextStyle();
 }

@@ -13,12 +13,13 @@ class AddPlanButton extends StatelessWidget {
       height: AddPlanButtonStyles.buttonHeight,
       child: ElevatedButton.icon(
         onPressed: () async {
-          final result = await Navigator.push(
-            context,
+          final navigator = Navigator.of(context);
+          final controller = context.read<PlanController>();
+          final result = await navigator.push(
+            // 상위 컨텍스트 사용 금지 규칙 준수: 사전 캡처한 navigator 사용
             MaterialPageRoute(builder: (context) => const AddPlanPage()),
           );
           if (result != null) {
-            final controller = context.read<PlanController>();
             await controller.loadPlans();
             // 상태 갱신을 위해 setState를 사용할 수 없으므로, PlanController에서 notifyListeners()를 활용하세요.
           }

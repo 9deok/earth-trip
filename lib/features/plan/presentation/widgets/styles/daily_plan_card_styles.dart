@@ -19,14 +19,21 @@ class DailyPlanCardStyles {
     top: Radius.circular(AppRadii.lg),
   );
 
-  static BoxDecoration dayBadgeDecoration(BuildContext context) =>
-      BoxDecoration(
-        color: AppColors.primary.shade100,
-        borderRadius: BorderRadius.circular(AppRadii.sm),
-      );
+  static BoxDecoration dayBadgeDecoration(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return BoxDecoration(
+      color: scheme.primaryContainer,
+      borderRadius: BorderRadius.circular(AppRadii.sm),
+    );
+  }
 
-  static TextStyle dayBadgeTextStyle(BuildContext context) =>
-      TextStyle(color: AppColors.primary.shade800, fontWeight: FontWeight.bold);
+  static TextStyle dayBadgeTextStyle(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return TextStyle(
+      color: scheme.onPrimaryContainer,
+      fontWeight: FontWeight.bold,
+    );
+  }
 
   static const SizedBox gapXs = SizedBox(width: AppSpacing.xs);
   static const SizedBox gapSm = SizedBox(width: AppSpacing.sm);

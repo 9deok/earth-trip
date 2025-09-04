@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/theme/text_styles.dart';
 
 class PlanCardDateRangeStyles {
-  static const TextStyle textStyle = TextStyle();
+  static const TextStyle rangeTextStyle = AppTextStyles.bodyMuted;
 }

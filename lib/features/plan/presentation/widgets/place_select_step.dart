@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'styles/place_select_step_styles.dart';
 import '../controllers/place_autocomplete_controller.dart';
+import '../../../../core/i18n/strings.dart';
 
 class PlaceSelectStep extends StatefulWidget {
   final List<String> selectedPlaces;
@@ -32,8 +33,8 @@ class _PlaceSelectStepState extends State<PlaceSelectStep> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                '여행 장소를 입력하세요',
+              Text(
+                Strings.Plan.selectPlaceTitle,
                 style: PlaceSelectStepStyles.titleStyle,
               ),
               PlaceSelectStepStyles.titleSpacing,
@@ -49,7 +50,7 @@ class _PlaceSelectStepState extends State<PlaceSelectStep> {
                         )
                         .toList(),
               ),
-              const SizedBox(height: 16),
+              PlaceSelectStepStyles.sectionGap,
               TextField(
                 controller: _controller,
                 decoration: const InputDecoration(

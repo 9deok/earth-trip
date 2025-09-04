@@ -8,7 +8,7 @@ class PlanCardStyles {
     fontWeight: FontWeight.bold,
   );
 
-  static const dDayStyle = TextStyle(color: AppColors.primary);
+  static const dDayStyle = TextStyle();
 
   static const EdgeInsets cardMargin = EdgeInsets.symmetric(
     horizontal: AppSpacing.md,
@@ -18,13 +18,16 @@ class PlanCardStyles {
   static const EdgeInsets cardPadding = EdgeInsets.all(AppSpacing.md);
 
   static const List<BoxShadow> cardShadow = [
-    BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 4)),
+    BoxShadow(color: Color(0x14000000), blurRadius: 20, offset: Offset(0, 8)),
   ];
 
-  static BoxDecoration cardDecoration(BuildContext context) => BoxDecoration(
-    border: Border.all(color: AppColors.primary.shade100),
-    borderRadius: BorderRadius.circular(AppRadii.md),
-    boxShadow: cardShadow,
-    color: Colors.white,
-  );
+  static BoxDecoration cardDecoration(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return BoxDecoration(
+      border: Border.all(color: scheme.outlineVariant),
+      borderRadius: BorderRadius.circular(AppRadii.lg),
+      boxShadow: cardShadow,
+      color: scheme.surface,
+    );
+  }
 }

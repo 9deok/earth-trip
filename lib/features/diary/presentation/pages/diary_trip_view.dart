@@ -129,6 +129,14 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
                               child: Stack(
                                 children: [
                                   _buildImage(e.photoUrl, height: imageHeight),
+                                  Positioned.fill(
+                                    child: Container(
+                                      decoration:
+                                          DiaryTripViewStyles.imageGradientOverlay(
+                                            context,
+                                          ),
+                                    ),
+                                  ),
                                   Positioned(
                                     right: 8,
                                     bottom: 8,
@@ -158,10 +166,28 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  '😊 ${e.moodScore}',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 6,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        DiaryTripViewStyles.moodBackgroundColor(
+                                          context,
+                                          e.moodScore,
+                                        ),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Text(
+                                    '😊 ${e.moodScore}',
+                                    style: TextStyle(
+                                      color: DiaryTripViewStyles.moodTextColor(
+                                        context,
+                                        e.moodScore,
+                                      ),
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
                                 Row(
@@ -174,6 +200,7 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
                                             await showModalBottomSheet(
                                               context: context,
                                               isScrollControlled: true,
+                                              useSafeArea: true,
                                               builder:
                                                   (_) => DiaryEntryForm(
                                                     planId: c.planId,
@@ -237,7 +264,10 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
                               ],
                             ),
                             const SizedBox(height: 12),
-                            Text(e.text),
+                            Text(
+                              e.text,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
                           ],
                         ),
                       ),
@@ -274,6 +304,7 @@ class _DiaryTripBodyState extends State<_DiaryTripBody> {
           final result = await showModalBottomSheet(
             context: context,
             isScrollControlled: true,
+            useSafeArea: true,
             builder: (_) => DiaryEntryForm(planId: c.planId),
           );
           if (result != null) {
